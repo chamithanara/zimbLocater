@@ -4982,10 +4982,10 @@ function($provide) {
     $location.hash = function(value) {
       if (isDefined(value) && value.length > 0) {
         $timeout(function() {
-          var scroll = document.querySelector('.scroll-content');
-          if (scroll) {
-            scroll.scrollTop = 0;
-          }
+//          var scroll = document.querySelector('.scroll-content');
+//          if (scroll) {
+//            scroll.scrollTop = 0;
+//          }
         }, 0, false);
       }
       return $location.__hash(value);

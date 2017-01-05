@@ -20,8 +20,8 @@ body{
 .hpaddding-100{padding-top:180px;}
 
 
-.item-complex .item-content, .item {background-color: #000;}
-.item{border-color: #000; border-width: 2px;}
+.item-complex .item-content, .item {background-color: #ffffff;}
+.item{border-color: #bcc1c4; border-width: 1px;}
 .list-bg{background-color: #ffffff;}
 .perH{color: #be6556; font-weight: bold; /*font-size: 18px;*/}
 .ion-tabs.tabs-color-active-positive .tab-item{color:#bcc1c4; }
@@ -36,10 +36,10 @@ body{
 .bar .button{font-size: 20px; border: none; min-width: 80px;}
 .p-details{padding-top: 80px;}
 .bar.menu-color .button{color:#000;}
-.bar.bar-hz, a{background-color: #000;;color:#bcc1c4; margin: auto}
+.bar.bar-hz, a{color:#bcc1c4; margin: auto}
 
-.bar.bar-dark .title{color:#bcc1c4;}
-.menu{background-color: #000;;}
+.bar.bar-dark .title{color:#ffffff;}
+.menu{background-color: #ffffff;;}
 .pull-right{
   float: right;
 }

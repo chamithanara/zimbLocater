@@ -2575,7 +2575,7 @@ body.grade-b, body.grade-c {
 .content {
   position: relative; }
 
-.scroll-content {
+/*.scroll-content {
   position: absolute;
   top: 0;
   right: 0;
@@ -2586,9 +2586,9 @@ body.grade-b, body.grade-c {
   padding-top: 1px;
   margin-bottom: -1px;
   width: auto;
-  height: auto; }
+  height: auto; }*/
 
-.menu .scroll-content.scroll-content-false {
+/*.menu .scroll-content.scroll-content-false {
   z-index: 11; }
 
 .scroll-view {
@@ -2611,7 +2611,7 @@ body.grade-b, body.grade-c {
   -moz-text-size-adjust: none;
   text-size-adjust: none;
   -webkit-transform-origin: left top;
-  transform-origin: left top; }
+  transform-origin: left top; }*/
 
 /**
  * Set ms-viewport to prevent MS "page squish" and allow fluid scrolling
@@ -3146,7 +3146,6 @@ a.subdued {
       background-image: linear-gradient(180deg, #6b46e5, #6b46e5 50%, transparent 50%); }
   .bar.bar-dark {
     border-color: #111;
-    background-color: #444444;
     background-image: linear-gradient(0deg, #111, #111 50%, transparent 50%);
     color: #fff; }
     .bar.bar-dark .title {
