@@ -19,6 +19,30 @@ body{
 }
 .hpaddding-100{padding-top:180px;}
 
+#AddTagButton:active {
+  border:1px solid #ffffff;
+	background:none;
+	outline:none;
+	padding:0;
+}
+
+
+div.stars {
+  width: 208px;
+  margin-top: 35%;
+}
+
+.popover {
+    height: auto !important;
+}
+
+ion-popover-view.fit {
+  height: auto !important;
+}
+
+ion-popover-view.fit ion-content {
+  position: relative !important;
+}
 
 .item-complex .item-content, .item {background-color: #ffffff;}
 .item{border-color: #bcc1c4; border-width: 1px;}
@@ -33,10 +57,15 @@ body{
 .tabs, .bar-header{background-color: #000;;}
 .ion-ios-information-outline, .ion-ios-list-outline, .ion-ios-settings, .ion-ios-reload{color: #ffffff;}
 .bar {background-image: none; border: none;}
-.bar .button{font-size: 20px; border: none; min-width: 80px;}
+.bar .button{font-size: 20px; border: none;}
 .p-details{padding-top: 80px;}
 .bar.menu-color .button{color:#000;}
 .bar.bar-hz, a{color:#bcc1c4; margin: auto}
+
+#map {
+    width: 100%;
+    height: 100%;
+}
 
 .bar.bar-dark .title{color:#ffffff;}
 .menu{background-color: #ffffff;;}
@@ -52,7 +81,7 @@ body{
 
 /* ====dashboard==== */
 
-div, p, .item p{color:#bcc1c4; font-size: 14px;}
+div, p, .item p{color:#000; font-size: 14px;}
 h1, h2, .item, .item h2{/*font-size: 23px;*/ font-weight: bold; color:#bcc1c4;}
 
  .custom-dark h1{

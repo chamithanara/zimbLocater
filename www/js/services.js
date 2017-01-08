@@ -22,13 +22,13 @@ angular.module('starter.services', [])
   var users = [{
     id: 0,
     name: 'Profile Name',
-    desc: 'Desciption',
+    desc: 'Travel, surprises, music, dancing, sports, books, last minute plans, open mind, photography, museum, craziness, spontaneity, going out (but also staying in), sharing, simplicity, respect, flip flops (yes, the sandals), down to earth (however fantasy is also very important), people, casual, word, news, work, sense of humor about yourself, awareness.',
     perH: 'XXXX',
-    details:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id eleifend elit. Integer ultrices pharetra sem, nec tincidunt diam maximus quis. Donec vehicula tempus .nunc, a viverra felis mattis sodales. Mauris quis scelerisque eros. Cras aliquam gravida rutrum. Donec congue libero sit amet dictum viverra. Morbi feugiat finibus felis, sed efficitur purus. Sed placerat massa sem, id venenatis lectus ',
+    details:'Details',
     face: './img/thumb-m.png',
-    addTime: '30 mins',
-    addCity: 'Morbi id ',
-    addCountry: 'consectetur adipiscing'
+    addTime: 'Registered Date',
+    addCity: 'City',
+    addCountry: 'Country'
 
   }, {
     id: 1,

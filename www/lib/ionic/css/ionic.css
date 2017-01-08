@@ -3064,7 +3064,7 @@ a.subdued {
     .bar.bar-clear .button {
       color: #fff; }
     .bar.bar-clear .title {
-      color: #fff; }
+      color: #000; }
   .bar.item-input-inset .item-input-wrapper {
     margin-top: -1px; }
     .bar.item-input-inset .item-input-wrapper input {
@@ -5294,7 +5294,7 @@ a.item-content {
  */
 .list {
   position: relative;
-  padding-top: 1px;
+  padding-top: 0px;
   padding-bottom: 1px;
   padding-left: 0;
   margin-bottom: 20px; }
@@ -6591,12 +6591,13 @@ progress {
     padding-right: 0;
     padding-left: 0.2em; }
   .button.button-block, .button.button-full {
-    margin-top: 10px;
+    margin-top: 10%;
     margin-bottom: 10px; }
   .button.button-light {
-    border-color: #ddd;
-    background-color: #fff;
-    color: #444; }
+    border-color: rgb(51, 205, 148);
+    background-color: rgb(51, 205, 148);
+    font-size: 18px;
+    color: white }
     .button.button-light:hover {
       color: #444;
       text-decoration: none; }
@@ -7013,7 +7014,7 @@ a.button {
   display: -moz-flex;
   display: -ms-flexbox;
   display: flex;
-  padding: 5px;
+  padding: 13px;
   width: 100%; }
 
 .row-wrap {
@@ -7029,7 +7030,7 @@ a.button {
 
 .row + .row {
   margin-top: -5px;
-  padding-top: 0; }
+  padding-top: 10; }
 
 .col {
   -webkit-box-flex: 1;
@@ -7375,7 +7376,7 @@ a.button {
  * --------------------------------------------------
  */
 .padding {
-  padding: 10px; }
+   }
 
 .padding-top, .padding-vertical {
   padding-top: 10px; }

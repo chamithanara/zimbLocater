@@ -65,9 +65,6 @@ angular.module('starter.controllers', ['starter.services', 'ngOpenFB','ionic'])
 
 .controller('TabCtrl', function($scope,  $state){
 
-
-   
-
    $scope.gotoHome = function() {
     console.log('logout');
      $state.go('home', {url: 'templates/landing.html'})
@@ -92,7 +89,7 @@ angular.module('starter.controllers', ['starter.services', 'ngOpenFB','ionic'])
 
 
 /* ---- dashboard  -- */
-.controller('DashCtrl', function($scope, $stateParams, ngFB, $state, $ionicModal, $timeout, $state, $ionicSideMenuDelegate, formData) {
+.controller('DashCtrl', function($scope, $stateParams, $ionicPopup, ngFB, $state, $ionicModal, $timeout, $state, $ionicSideMenuDelegate, formData, $ionicPopover) {
  $scope.ContinueTxt = "Continue";
  console.log("loading...Dashboard")
  $scope.user = formData.getForm();
@@ -108,7 +105,36 @@ angular.module('starter.controllers', ['starter.services', 'ngOpenFB','ionic'])
   };
   */
 
+  var myLatlng = new google.maps.LatLng(37.3000, -120.4833);
 
+    var mapOptions = {
+        center: myLatlng,
+        zoom: 16,
+        mapTypeControl: true,
+      mapTypeControlOptions: {
+          style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+          position: google.maps.ControlPosition.TOP_CENTER
+      },
+      zoomControl: true,
+      zoomControlOptions: {
+          position: google.maps.ControlPosition.LEFT_CENTER
+      },
+      scaleControl: true,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+
+    var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+    navigator.geolocation.getCurrentPosition(function(pos) {
+        map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
+        var myLocation = new google.maps.Marker({
+            position: new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude),
+            map: map,
+            title: "My Location"
+        });
+    });
+
+    $scope.map = map;
 
 // Create the login modal that we will use later
   $ionicModal.fromTemplateUrl('templates/menu.html', {
@@ -125,6 +151,10 @@ angular.module('starter.controllers', ['starter.services', 'ngOpenFB','ionic'])
   // Open the login modal
   $scope.login = function() {
     $scope.modal.show();
+  };
+  
+  $scope.AddATag = function() {
+    
   };
 /* 
 $scope.toggleProjects = function() {
@@ -154,7 +184,63 @@ $scope.toggleProjects = function() {
                 alert('Facebook login failed');
             }
         });
-};
+  };
+  
+  
+  ///////////
+  
+  // .fromTemplate() method
+  var template = '<ion-popover-view style="width:75%; margin-left:12.5%">'+
+'<ion-header-bar>'+
+  '<h1 class="title" style="text-align:center;">Confirm Your Tag</h1>'+
+'</ion-header-bar>'+
+'<ion-content scroll="false">'+
+  '<h3 style="font-size:15px;margin-top:50px;text-align: center;">Please Select Your Tag Type</h3>'+
+  '<ion-radio ng-model="choice" ng-value="1">Police Check Point</ion-radio>'+
+'<ion-radio ng-model="choice" ng-value="2">Robbery Prone Area</ion-radio>'+
+'<ion-radio ng-model="choice" ng-value="3">Crime Scene</ion-radio>'+
+'<ion-radio ng-model="choice" ng-value="4">Accident</ion-radio>'+
+'<ion-radio ng-model="choice" ng-value="5">Big Pot Hole</ion-radio>'+
+'<ion-radio ng-model="choice" ng-value="6">Disaster (Flooding/Fire)</ion-radio>'+
+'<ion-radio ng-model="choice" ng-value="7">School Children</ion-radio>'+
+'<button class="button button-light button-android full" ng-click="AddTagToMap()" style="Width:100%">Confirm Tag</button>'+
+'</ion-content>'+
+'</ion-popover-view>';
+
+  $scope.popover = $ionicPopover.fromTemplate(template, {
+    scope: $scope
+  });
+
+  $scope.openPopover = function($event) {
+    $scope.popover.show($event);
+    $scope.choice = '1';
+  };
+  $scope.closePopover = function() {
+    $scope.popover.hide();
+  };
+  
+  $scope.AddTagToMap = function() {
+    $scope.closePopover();
+    
+    $ionicPopup.alert({
+      title: 'Done!',
+      template: 'Tag has been Added Successfully'
+    });
+  }
+  
+  //Cleanup the popover when we're done with it!
+  $scope.$on('$destroy', function() {
+    $scope.popover.remove();
+  });
+  // Execute action on hidden popover
+  $scope.$on('popover.hidden', function() {
+    // Execute action
+  });
+  // Execute action on remove popover
+  $scope.$on('popover.removed', function() {
+    // Execute action
+  });
+    
 })
 
 /* ---- List  -- */
@@ -172,11 +258,27 @@ $scope.toggleProjects = function() {
     Chats.remove(chat);
   };
 })
+
+.controller('RatingCtrl', function($scope, $ionicPopup) {
+  // set the rate and max variables
+  $scope.rating = {};
+  $scope.rating.rate = 3;
+  $scope.rating.max = 5;
+
+  $scope.AddRating = function() {
+    $ionicPopup.alert({
+        title: 'Done!',
+        template: 'You Successfully Rated'
+      });
+    }
+})
+
+
 /* ------ */
 /* ---- List Details controller -- */
 
 .controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
-  $scope.chat = Chats.get($stateParams.chatId);
+  $scope.chat = Chats.get(0);
 })
 
 /* ------ */
