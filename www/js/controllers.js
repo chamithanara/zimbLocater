@@ -132,7 +132,7 @@ angular.module('starter.controllers', ['starter.services', 'ngOpenFB','ionic'])
         myLocation = new google.maps.Marker({
             position: new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude),
             map: map,
-            draggable: true,
+           // draggable: true,
             animation: google.maps.Animation.DROP,
             title: "My Location"
         });
@@ -141,10 +141,10 @@ angular.module('starter.controllers', ['starter.services', 'ngOpenFB','ionic'])
         longitude = pos.coords.longitude;
     });
     
-    google.maps.event.addListener(map, 'dragend', function(event) {
-      document.getElementById("lat").value = event.latLng.lat();
-      document.getElementById("long").value = event.latLng.lng();
-    });
+//    google.maps.event.addListener(map, 'dragend', function(event) {
+//      document.getElementById("lat").value = event.latLng.lat();
+//      document.getElementById("long").value = event.latLng.lng();
+//    });
     
     function toggleBounce() {
         if (myLocation.getAnimation() !== null) {
@@ -215,13 +215,12 @@ $scope.toggleProjects = function() {
   ///////////
   
   // .fromTemplate() method
-  var template = '<ion-popover-view style="width:99%">'+
-'<ion-header-bar>'+
-  '<h1 class="title" style="text-align:center;">Confirm Your Tag</h1>'+
+  var template = '<ion-popover-view style="width:100%; margin-left: -6px !important;">'+
+'<ion-header-bar style="width:100%; margin-left: -6px !important;">'+
+  '<h1 class="title" style="text-align:center;">Please Select Your Tag Type</h1>'+
 '</ion-header-bar>'+
-'<ion-content scroll="false">'+
-  '<h3 style="font-size:15px;margin-top:50px;text-align: center;">Please Select Your Tag Type</h3>'+
-  '<ion-radio ng-model="choice" ng-value="1">Police Check Point</ion-radio>'+
+'<ion-content scroll="false" style="width:100%; margin-left: -6px !important;">'+
+  '<ion-radio ng-model="choice" style="margin-top: 42px;" ng-value="1">Police Check Point</ion-radio>'+
 '<ion-radio ng-model="choice" ng-value="2">Robbery Prone Area</ion-radio>'+
 '<ion-radio ng-model="choice" ng-value="3">Crime Scene</ion-radio>'+
 '<ion-radio ng-model="choice" ng-value="4">Accident</ion-radio>'+
