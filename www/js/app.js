@@ -128,11 +128,22 @@ console.log("ionic"+version);
       url: '/list/:chatId',
       views: {
         'menuContent': {
-          templateUrl: 'templates/chat-detail.html',
+          templateUrl: 'templates/profile.html',
           controller: 'ChatDetailCtrl'
         }
       }
     })
+    
+    .state('app.aboutus', {
+      url: '/aboutus',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/aboutus.html',
+          controller: 'AboutusCtrl'
+        }
+      }
+    })
+    
 
   .state('app.settings', {
     url: '/settings',

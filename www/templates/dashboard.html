@@ -11,9 +11,13 @@
 
 </ion-list> 
   <div id="map" data-tap-disabled="true"></div>
-   <div class="bar bar-footer bar-balanced">
-
+   <div class="bar bar-footer bar-balanced"> 
    <button id="AddTagButton" ng-click="openPopover($event)" style="min-width: 100%; border-radius: 0px;" class="button button-lite icon-center ion-android-add-circle">&nbsp;&nbsp;Add A Tag Here</button>
+ 
+   <div style="position: absolute;">
+         <a class="button button-icon icon ion-ios-navigate-outline" style="z-index:3; color: black;font-weight:900; border-radius: 50px;margin-top:-64px; 
+    padding: 4px;" ng-click="reCenter()"></a>
+   </div>
   </div>
 
   </ion-content>

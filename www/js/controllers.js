@@ -104,7 +104,9 @@ angular.module('starter.controllers', ['starter.services', 'ngOpenFB','ionic'])
   
   };
   */
-
+  var latitude = null;
+  var longitude = null;
+  
   var myLatlng = new google.maps.LatLng(37.3000, -120.4833);
 
     var mapOptions = {
@@ -124,18 +126,36 @@ angular.module('starter.controllers', ['starter.services', 'ngOpenFB','ionic'])
     };
 
     var map = new google.maps.Map(document.getElementById("map"), mapOptions);
-
+  
     navigator.geolocation.getCurrentPosition(function(pos) {
         map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
-        var myLocation = new google.maps.Marker({
+        myLocation = new google.maps.Marker({
             position: new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude),
             map: map,
+            draggable: true,
+            animation: google.maps.Animation.DROP,
             title: "My Location"
         });
+        myLocation.addListener('click', toggleBounce);
+        latitude = pos.coords.latitude;
+        longitude = pos.coords.longitude;
     });
-
+    
+    google.maps.event.addListener(map, 'dragend', function(event) {
+      document.getElementById("lat").value = event.latLng.lat();
+      document.getElementById("long").value = event.latLng.lng();
+    });
+    
+    function toggleBounce() {
+        if (myLocation.getAnimation() !== null) {
+          myLocation.setAnimation(null);
+        } else {
+          myLocation.setAnimation(google.maps.Animation.BOUNCE);
+        }
+     }
+      
     $scope.map = map;
-
+  
 // Create the login modal that we will use later
   $ionicModal.fromTemplateUrl('templates/menu.html', {
     scope: $scope
@@ -155,6 +175,11 @@ angular.module('starter.controllers', ['starter.services', 'ngOpenFB','ionic'])
   
   $scope.AddATag = function() {
     
+  };
+  
+  $scope.reCenter = function() {
+    var center = new google.maps.LatLng(latitude, longitude);
+    map.panTo(center);
   };
 /* 
 $scope.toggleProjects = function() {
@@ -190,7 +215,7 @@ $scope.toggleProjects = function() {
   ///////////
   
   // .fromTemplate() method
-  var template = '<ion-popover-view style="width:75%; margin-left:12.5%">'+
+  var template = '<ion-popover-view style="width:99%">'+
 '<ion-header-bar>'+
   '<h1 class="title" style="text-align:center;">Confirm Your Tag</h1>'+
 '</ion-header-bar>'+
@@ -271,6 +296,10 @@ $scope.toggleProjects = function() {
         template: 'You Successfully Rated'
       });
     }
+})
+
+.controller('AboutusCtrl', function($scope) {
+ 
 })
 
 
