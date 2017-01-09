@@ -156,6 +156,20 @@ angular.module('starter.controllers', ['starter.services', 'ngOpenFB','ionic'])
       
     $scope.map = map;
   
+    var infoWnd = new google.maps.InfoWindow({
+      content :  map.getCenter().toUrlValue(),
+      position : map.getCenter(),
+      disableAutoPan: true
+    });
+    infoWnd.open(map);
+
+    //Retrive the center location
+    google.maps.event.addListener(map, "center_changed", function() {
+      infoWnd.setContent(map.getCenter().toUrlValue());
+      infoWnd.setPosition(map.getCenter());
+      infoWnd.open(map);
+    });
+
 // Create the login modal that we will use later
   $ionicModal.fromTemplateUrl('templates/menu.html', {
     scope: $scope
