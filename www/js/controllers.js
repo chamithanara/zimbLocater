@@ -109,66 +109,66 @@ angular.module('starter.controllers', ['starter.services', 'ngOpenFB','ionic'])
   
   var myLatlng = new google.maps.LatLng(37.3000, -120.4833);
 
-    var mapOptions = {
-        center: myLatlng,
-        zoom: 16,
-        mapTypeControl: true,
-      mapTypeControlOptions: {
-          style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
-          position: google.maps.ControlPosition.TOP_CENTER
-      },
-      zoomControl: true,
-      zoomControlOptions: {
-          position: google.maps.ControlPosition.LEFT_CENTER
-      },
-      scaleControl: true,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-    };
+  var mapOptions = {
+      center: myLatlng,
+      zoom: 16,
+      mapTypeControl: true,
+    mapTypeControlOptions: {
+        style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+        position: google.maps.ControlPosition.TOP_CENTER
+    },
+    zoomControl: true,
+    zoomControlOptions: {
+        position: google.maps.ControlPosition.LEFT_CENTER
+    },
+    scaleControl: true,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  };
 
-    var map = new google.maps.Map(document.getElementById("map"), mapOptions);
-  
-    navigator.geolocation.getCurrentPosition(function(pos) {
-        map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
-        myLocation = new google.maps.Marker({
-            position: new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude),
-            map: map,
-           // draggable: true,
-            animation: google.maps.Animation.DROP,
-            title: "My Location"
-        });
-        myLocation.addListener('click', toggleBounce);
-        latitude = pos.coords.latitude;
-        longitude = pos.coords.longitude;
-    });
+  var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+  navigator.geolocation.getCurrentPosition(function(pos) {
+      map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
+      myLocation = new google.maps.Marker({
+          position: new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude),
+          map: map,
+          // draggable: true,
+          animation: google.maps.Animation.DROP,
+          title: "My Location"
+      });
+      myLocation.addListener('click', toggleBounce);
+      latitude = pos.coords.latitude;
+      longitude = pos.coords.longitude;
+  });
     
 //    google.maps.event.addListener(map, 'dragend', function(event) {
 //      document.getElementById("lat").value = event.latLng.lat();
 //      document.getElementById("long").value = event.latLng.lng();
 //    });
     
-    function toggleBounce() {
-        if (myLocation.getAnimation() !== null) {
-          myLocation.setAnimation(null);
-        } else {
-          myLocation.setAnimation(google.maps.Animation.BOUNCE);
-        }
-     }
-      
-    $scope.map = map;
-  
-    var infoWnd = new google.maps.InfoWindow({
-      content :  map.getCenter().toUrlValue(),
-      position : map.getCenter(),
-      disableAutoPan: true
-    });
-    infoWnd.open(map);
+  function toggleBounce() {
+      if (myLocation.getAnimation() !== null) {
+        myLocation.setAnimation(null);
+      } else {
+        myLocation.setAnimation(google.maps.Animation.BOUNCE);
+      }
+    }
+    
+  $scope.map = map;
 
-    //Retrive the center location
-    google.maps.event.addListener(map, "center_changed", function() {
-      infoWnd.setContent(map.getCenter().toUrlValue());
-      infoWnd.setPosition(map.getCenter());
-      infoWnd.open(map);
-    });
+  var infoWnd = new google.maps.InfoWindow({
+    content :  map.getCenter().toUrlValue(),
+    position : map.getCenter(),
+    disableAutoPan: true
+  });
+  infoWnd.open(map);
+
+  //Retrive the center location
+  google.maps.event.addListener(map, "center_changed", function() {
+    infoWnd.setContent(map.getCenter().toUrlValue());
+    infoWnd.setPosition(map.getCenter());
+    infoWnd.open(map);
+  });
 
 // Create the login modal that we will use later
   $ionicModal.fromTemplateUrl('templates/menu.html', {
@@ -187,8 +187,14 @@ angular.module('starter.controllers', ['starter.services', 'ngOpenFB','ionic'])
     $scope.modal.show();
   };
   
-  $scope.AddATag = function() {
-    
+  $scope.AddTagToMap = function() {
+    myLocation = new google.maps.Marker({
+          position: new google.maps.LatLng(latitude, longitude),
+          map: map,
+          // draggable: true,
+          animation: google.maps.Animation.DROP,
+          title: "My Location"
+      });
   };
   
   $scope.reCenter = function() {
