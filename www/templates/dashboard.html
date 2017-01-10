@@ -10,16 +10,18 @@
 
       </ion-list> 
       <div id="map" data-tap-disabled="true" style="position: absolute;">
-        <button class="centerButton button-icon icon ion-ios-navigate-outline" style="z-index:3;"></button>
       </div>
-      
+      <div style="position: absolute;top: 52.5%;left: 45%;display: table-cell;
+  vertical-align: middle;">
+         <img class="icon-center" src="./img/Crosshair.png" />
+      </div>
+<!--           <button class="centerButton button-icon icon ion-ios-navigate-outline" style="z-index:3;"></button>-->
       <div class="bar bar-footer bar-balanced"> 
-      <button id="AddTagButton" ng-click="openPopover($event)" style="min-width: 100%; border-radius: 0px;" class="button button-lite icon-center ion-android-add-circle">&nbsp;&nbsp;Add A Tag Here</button>
-    
-      <div style="position: absolute;">
-            <a class="button button-icon icon ion-ios-navigate-outline" style="z-index:3; color: black;font-weight:900; border-radius: 50px;margin-top:-64px; 
-        padding: 4px;" ng-click="reCenter()"></a>
-      </div>
+         <button id="AddTagButton" ng-click="openPopover($event)" style="min-width: 100%; border-radius: 0px;background-color: #33cd5f;color: #fff;" class="button button-lite icon-center ion-android-add-circle">&nbsp;&nbsp;Add A Tag Here</button>
+       
+         <div style="position: absolute;">
+            <a class="button" style="z-index:3;margin-top:-64px;padding: 4px;height: 43px;" ng-click="reCenter()"><img src="./img/navigation.png" /></a>
+         </div>
       </div>
     </ion-content>
 </ion-view>

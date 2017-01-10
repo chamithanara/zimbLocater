@@ -136,7 +136,7 @@ angular.module('starter.controllers', ['starter.services', 'ngOpenFB','ionic'])
           animation: google.maps.Animation.DROP,
           title: "My Location"
       });
-      myLocation.addListener('click', toggleBounce);
+//      myLocation.addListener('click', toggleBounce);
       latitude = pos.coords.latitude;
       longitude = pos.coords.longitude;
   });
@@ -146,29 +146,29 @@ angular.module('starter.controllers', ['starter.services', 'ngOpenFB','ionic'])
 //      document.getElementById("long").value = event.latLng.lng();
 //    });
     
-  function toggleBounce() {
-      if (myLocation.getAnimation() !== null) {
-        myLocation.setAnimation(null);
-      } else {
-        myLocation.setAnimation(google.maps.Animation.BOUNCE);
-      }
-    }
+//  function toggleBounce() {
+//      if (myLocation.getAnimation() !== null) {
+//        myLocation.setAnimation(null);
+//      } else {
+//        myLocation.setAnimation(google.maps.Animation.BOUNCE);
+//      }
+//    }
     
   $scope.map = map;
 
-  var infoWnd = new google.maps.InfoWindow({
-    content :  map.getCenter().toUrlValue(),
-    position : map.getCenter(),
-    disableAutoPan: true
-  });
-  infoWnd.open(map);
-
-  //Retrive the center location
-  google.maps.event.addListener(map, "center_changed", function() {
-    infoWnd.setContent(map.getCenter().toUrlValue());
-    infoWnd.setPosition(map.getCenter());
-    infoWnd.open(map);
-  });
+//  var infoWnd = new google.maps.InfoWindow({
+//    content :  map.getCenter().toUrlValue(),
+//    position : map.getCenter(),
+//    disableAutoPan: true
+//  });
+//  infoWnd.open(map);
+//
+//  //Retrive the center location
+//  google.maps.event.addListener(map, "center_changed", function() {
+//    infoWnd.setContent(map.getCenter().toUrlValue());
+//    infoWnd.setPosition(map.getCenter());
+//    infoWnd.open(map);
+//  });
 
 // Create the login modal that we will use later
   $ionicModal.fromTemplateUrl('templates/menu.html', {
@@ -188,6 +188,7 @@ angular.module('starter.controllers', ['starter.services', 'ngOpenFB','ionic'])
   };
   
   $scope.AddTagToMap = function() {
+    
     myLocation = new google.maps.Marker({
           position: new google.maps.LatLng(latitude, longitude),
           map: map,
@@ -260,6 +261,20 @@ $scope.toggleProjects = function() {
     $scope.choice = '1';
   };
   $scope.closePopover = function() {
+    console.log(map.getCenter());
+    
+    myLocation = new google.maps.Marker({
+          position: new google.maps.LatLng(map.getCenter().lat(), map.getCenter().lng()),
+          map: map,
+          // draggable: true,
+          animation: google.maps.Animation.DROP,
+          icon: {
+            path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+            scale: 5
+          },
+          title: "My Location"
+      });
+      
     $scope.popover.hide();
   };
   
