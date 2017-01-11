@@ -16,7 +16,7 @@ angular.module('starter.controllers', ['starter.services', 'ngOpenFB','ionic'])
 
 
   $scope.submitForm = function(user) {
-   if (user.firstName) {
+   if (user.username) {
      console.log("Submitting Form", user);
      formData.updateForm(user);
      console.log("Retrieving form from service", formData.getForm());
@@ -27,7 +27,7 @@ angular.module('starter.controllers', ['starter.services', 'ngOpenFB','ionic'])
  };
  
  $scope.submitRegisterForm = function(user) {
-   if (user.firstName) {
+   if (user.username) {
      console.log("Submitting Form", user);
      formData.updateForm(user);
      console.log("Retrieving form from service", formData.getForm());
@@ -236,11 +236,11 @@ $scope.toggleProjects = function() {
   ///////////
   
   // .fromTemplate() method
-  var template = '<ion-popover-view style="width:100%; margin-left: -6px !important;">'+
-'<ion-header-bar style="width:100%; margin-left: -6px !important;">'+
+  var template = '<ion-popover-view style="width:98%; margin-left: -6px !important;">'+
+'<ion-header-bar style="width:100%; ">'+
   '<h1 class="title" style="text-align:center;">Please Select Your Tag Type</h1>'+
 '</ion-header-bar>'+
-'<ion-content scroll="false" style="width:100%; margin-left: -6px !important;">'+
+'<ion-content scroll="false" style="width:100%; ">'+
   '<ion-radio ng-model="choice" style="margin-top: 42px;" ng-value="1">Police Check Point</ion-radio>'+
 '<ion-radio ng-model="choice" ng-value="2">Robbery Prone Area</ion-radio>'+
 '<ion-radio ng-model="choice" ng-value="3">Crime Scene</ion-radio>'+

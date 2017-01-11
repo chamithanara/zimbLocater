@@ -1,10 +1,10 @@
-<ion-view title ="App Title" class="bg-pane" ng-controller="LoginCtrl" >
+<ion-view title ="" class="bg-pane" ng-controller="LoginCtrl" >
 <!-- ng-style="{'background-image':'url({{bgSrc}})'}" -= -->
    
     <ion-content padding="true" class="scroll-content">
    
 <div class="hpaddding-100"></div>
-<div class="logo-login"></div>
+<div class="logo-login"><img style="max-width: 100%; max-height: 100%;" src="./img/mob-logo.png" /></div>
 <div class="row login-text" >
 <!--<p>{{descTxt}}</p>-->
 <!--<input type="text" placeholder="Enter Name">-->
@@ -18,38 +18,24 @@
 <input type="text" class="text-input text-input--transparent" placeholder="Enter Name">
 -->
 <form class="login-form" ng-submit="submitRegisterForm(user)">
- <ion-list>
-   <ion-item class="item-input">
-   
+ <ion-list>   
       <table>
         <tr>
           <td>
-            <label>Enter Username</label>
-          </td>
-          <td>
-            <input type="text" ng-model="user.firstName" placeholder="Username">
+            <input type="text" ng-model="user.username" placeholder="Enter Username">
           </td>
         </tr>
         <tr>
           <td>
-            <label>Enter Password</label>
-          </td>
-          <td>
-            <input type="password" ng-model="user.Password" placeholder="Password">
+            <input type="password" ng-model="user.Password" placeholder="Enter Password">
           </td>
         </tr>
         <tr>
           <td>
-           <label>Re-Enter Password</label>
-          </td>
-          <td>
-  	       <input type="password" ng-model="user.Re_Password" placeholder="Re-Enter">
+  	       <input type="password" ng-model="user.Re_Password" placeholder="Re-Enter Password">
           </td>
         </tr>
       </table>
-      
-   </ion-item>
-   
    <input type="submit" class="button button-block button-calm" value="{{registerTxt}}">
  </ion-list>
 </form>
