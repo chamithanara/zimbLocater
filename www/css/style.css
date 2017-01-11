@@ -187,7 +187,7 @@ h1, h2, .item, .item h2{/*font-size: 23px;*/ font-weight: bold; color:#bcc1c4;}
   width: 20%;
 }
 
-.logo-login{height:140px;width:140px;display:block;margin:0 auto;
+.logo-login{height:120px;width:120px;display:block;margin:0 auto;
   -webkit-background-size:cover;-moz-background-size:cover;background-size:cover; border: none;}
 .login-text p{color:#00baff;font-size:18px;margin:0 auto;padding-bottom:20px;}
 .login-button{border:solid 1px #00baff !important;color:#00baff !important;  width: 220px;}

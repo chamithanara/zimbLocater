@@ -10,12 +10,12 @@ angular.module('starter.controllers', ['starter.services', 'ngOpenFB','ionic'])
   $scope.bgSrc = '/img/mob-background.png';
   $scope.descTxt = "Find the service people";
   $scope.loginTxt = "Login";
+  $scope.nextTxt = "Next";
   $scope.registerTxt = "Register";
 
   $scope.user = {};
 
-
-  $scope.submitForm = function(user) {
+  $scope.submitFormLogin = function(user) {
    if (user.username) {
      console.log("Submitting Form", user);
      formData.updateForm(user);
@@ -26,8 +26,19 @@ angular.module('starter.controllers', ['starter.services', 'ngOpenFB','ionic'])
    }
  };
  
- $scope.submitRegisterForm = function(user) {
-   if (user.username) {
+ $scope.submitRegisterBasicForm = function(user) {
+   if (user.name) {
+     console.log("Submitting Form", user);
+     formData.updateForm(user);
+     console.log("Retrieving form from service", formData.getForm());
+     $state.go('registerMoreInfo');
+   } else {
+     alert("Please fill out some information for the user");
+   }
+ };
+
+ $scope.submitRegisterMoreInfoMore = function(user) {
+   if (user.name) {
      console.log("Submitting Form", user);
      formData.updateForm(user);
      console.log("Retrieving form from service", formData.getForm());
