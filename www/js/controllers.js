@@ -1,11 +1,7 @@
 angular.module('starter.controllers', ['starter.services', 'ngOpenFB','ionic'])
 
-
-/* ==== Login ==== */
 .controller("LoginCtrl", function($scope, $state, formData) {
-
-  
-  console.log("loading...assets")
+ 
   $scope.logoSrc = '/img/mob-logo.png';
   $scope.bgSrc = '/img/mob-background.png';
   $scope.descTxt = "Find the service people";
@@ -47,36 +43,19 @@ angular.module('starter.controllers', ['starter.services', 'ngOpenFB','ionic'])
      alert("Please fill out some information for the user");
    }
  };
-  
-/*
-  if (window.matchMedia("(min-width: 400px)").matches) {
-    $scope.logoSrc = '/img/mob-logo.png';
-} else {
-    $scope.logoSrc = '/img/mob-logox.png';
-}
-  */
-  
 })
-
-
-
 
 /* ---- menu controller -- */
 .controller('NavController', function($scope, $ionicSideMenuDelegate) {
-      $scope.toggleLeft = function() {
-        $ionicSideMenuDelegate.toggleLeft();
-      };
-
-
-    })
-
-
+    $scope.toggleLeft = function() {
+      $ionicSideMenuDelegate.toggleLeft();
+    };
+})
 
 /* ---- tabs controller -- */
-
 .controller('TabCtrl', function($scope,  $state){
 
-   $scope.gotoHome = function() {
+  $scope.gotoHome = function() {
     console.log('logout');
      $state.go('home', {url: 'templates/landing.html'})
   }
@@ -97,24 +76,12 @@ angular.module('starter.controllers', ['starter.services', 'ngOpenFB','ionic'])
   }
 })
 
-
-
 /* ---- dashboard  -- */
 .controller('DashCtrl', function($scope, $stateParams, $ionicPopup, ngFB, $state, $ionicModal, $timeout, $state, $ionicSideMenuDelegate, formData, $ionicPopover) {
- $scope.ContinueTxt = "Continue";
- console.log("loading...Dashboard")
- $scope.user = formData.getForm();
- //console.log("Submitting Form", $scope.user);
-  //$scope.session = Session.get({sessionId: $stateParams.sessionId});
- //$scope.$root.tabsHidden = "tabs-hide";
-/*
- scope.gotoHome = function() {
-   console.log("tab > Home")
-   //$state.go('tab.chats');
-   $state.go('/', {url: 'templates/landing.html'})
-  
-  };
-  */
+  $scope.ContinueTxt = "Continue";
+  console.log("loading...Dashboard")
+  $scope.user = formData.getForm();
+
   var latitude = null;
   var longitude = null;
   
@@ -147,7 +114,7 @@ angular.module('starter.controllers', ['starter.services', 'ngOpenFB','ionic'])
           animation: google.maps.Animation.DROP,
           title: "My Location"
       });
-//      myLocation.addListener('click', toggleBounce);
+      // myLocation.addListener('click', toggleBounce);
       latitude = pos.coords.latitude;
       longitude = pos.coords.longitude;
   });
@@ -213,24 +180,7 @@ angular.module('starter.controllers', ['starter.services', 'ngOpenFB','ionic'])
     var center = new google.maps.LatLng(latitude, longitude);
     map.panTo(center);
   };
-/* 
-$scope.toggleProjects = function() {
-    $ionicSideMenuDelegate.toggleLeft();
-  };*/
 
-  // Perform the login action when the user submits the login form
-  /*
-  $scope.doLogin = function() {
-    console.log('Doing login', $scope.loginData);
-
-    // Simulate a login delay. Remove this and replace with your login
-    // code if using a login system
-    $timeout(function() {
-      $scope.closeLogin();
-    }, 1000);
-  };
-*/
- 
   $scope.fbLogin = function () {
     ngFB.login({scope: 'public_profile, email, user_friends'}).then(
         function (response) {
@@ -243,25 +193,21 @@ $scope.toggleProjects = function() {
         });
   };
   
-  
-  ///////////
-  
-  // .fromTemplate() method
-  var template = '<ion-popover-view style="width:98%; margin-left: -6px !important;">'+
-'<ion-header-bar style="width:100%; ">'+
-  '<h1 class="title" style="text-align:center;">Please Select Your Tag Type</h1>'+
-'</ion-header-bar>'+
-'<ion-content scroll="false" style="width:100%; ">'+
-  '<ion-radio ng-model="choice" style="margin-top: 42px;" ng-value="1">Police Check Point</ion-radio>'+
-'<ion-radio ng-model="choice" ng-value="2">Robbery Prone Area</ion-radio>'+
-'<ion-radio ng-model="choice" ng-value="3">Crime Scene</ion-radio>'+
-'<ion-radio ng-model="choice" ng-value="4">Accident</ion-radio>'+
-'<ion-radio ng-model="choice" ng-value="5">Big Pot Hole</ion-radio>'+
-'<ion-radio ng-model="choice" ng-value="6">Disaster (Flooding/Fire)</ion-radio>'+
-'<ion-radio ng-model="choice" ng-value="7">School Children</ion-radio>'+
-'<button class="button button-light button-android full" ng-click="AddTagToMap()" style="Width:100%">Confirm Tag</button>'+
-'</ion-content>'+
-'</ion-popover-view>';
+  var template =  '<ion-popover-view style="width:98%; margin-left: -6px !important;">'+
+                  '<ion-header-bar style="width:100%; ">'+
+                    '<h1 class="title" style="text-align:center;">Please Select Your Tag Type</h1>'+
+                  '</ion-header-bar>'+
+                  '<ion-content scroll="false" style="width:100%; ">'+
+                    '<ion-radio ng-model="choice" style="margin-top: 42px;" ng-value="1">Police Check Point</ion-radio>'+
+                  '<ion-radio ng-model="choice" ng-value="2">Robbery Prone Area</ion-radio>'+
+                  '<ion-radio ng-model="choice" ng-value="3">Crime Scene</ion-radio>'+
+                  '<ion-radio ng-model="choice" ng-value="4">Accident</ion-radio>'+
+                  '<ion-radio ng-model="choice" ng-value="5">Big Pot Hole</ion-radio>'+
+                  '<ion-radio ng-model="choice" ng-value="6">Disaster (Flooding/Fire)</ion-radio>'+
+                  '<ion-radio ng-model="choice" ng-value="7">School Children</ion-radio>'+
+                  '<button class="button button-light button-android full" ng-click="AddTagToMap()" style="Width:100%">Confirm Tag</button>'+
+                  '</ion-content>'+
+                  '</ion-popover-view>';
 
   $scope.popover = $ionicPopover.fromTemplate(template, {
     scope: $scope
@@ -315,13 +261,7 @@ $scope.toggleProjects = function() {
 
 /* ---- List  -- */
 .controller('ChatsCtrl', function($scope, Chats) {
-  // With the new view caching in Ionic, Controllers are only called
-  // when they are recreated or on app start, instead of every page change.
-  // To listen for when this page is active (for example, to refresh data),
-  // listen for the $ionicView.enter event:
-  //
-  //$scope.$on('$ionicView.enter', function(e) {
-  //});
+  
   console.log("loading...list")
   $scope.chats = Chats.all();
   $scope.remove = function(chat) {
@@ -370,8 +310,7 @@ $scope.toggleProjects = function() {
     });
   };
 
-
-// Check Ionic Deploy for new code
+  // Check Ionic Deploy for new code
   $scope.checkForUpdates = function() {
     console.log('Ionic Deploy: Checking for updates');
     deploy.check().then(function(hasUpdate) {
@@ -381,19 +320,14 @@ $scope.toggleProjects = function() {
       console.error('Ionic Deploy: Unable to check for updates', err);
     });
   }
-//var deploy = new Ionic.Deploy();
+  //var deploy = new Ionic.Deploy();
 
-  
-
-$scope.gotoState = function() {
-   console.log("login")
-   //$state.go('tab.chats');
-   $state.go('app.settings', {url: 'templates/settings.html'})
-  
-  };
-  
-
-})
+  $scope.gotoState = function() {
+    console.log("login")
+    //$state.go('tab.chats');
+    $state.go('app.settings', {url: 'templates/settings.html'})
+    };
+  })
 
 
 /* ---- Settings  -- */
@@ -404,7 +338,6 @@ $scope.gotoState = function() {
    //$state.go('tab.chats');
    //$state.go('tab.dash', {url: 'templates/tab-dash.html'})
   
- 
   /*ngFB.api({
         path: '/me',
         params: {fields: 'id,name'}
@@ -415,7 +348,7 @@ $scope.gotoState = function() {
         function (error) {
             alert('Facebook error: ' + error.error_description);
         });
-*/
+  */
 
   $scope.settings = {
     enableFriends: true

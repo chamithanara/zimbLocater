@@ -1,25 +1,11 @@
-<!--
-  This template loads for the 'tab.friend-detail' state (app.js)
-  'friend' is a $scope variable created in the FriendsCtrl controller (controllers.js)
-  The FriendsCtrl pulls data from the Friends service (service.js)
-  The Friends service returns an array of friend data
--->
-
-
-  
-
 <ion-view  class="list-bg" style="margin-left:10px; padding:4px 18px 8px 1px">
-
- <ion-nav-buttons side="left">
-
-        <button menu-toggle="left" class="button button-clear icon ion-navicon"></button>
-
-</ion-nav-buttons>
-
+  <ion-nav-buttons side="left">
+    <button menu-toggle="left" class="button button-clear icon ion-navicon"></button>
+  </ion-nav-buttons>
 
   <ion-content class="padding scroll-content">
-  <p></p>
-  <p></p>
+    <p></p>
+    <p></p>
     <img ng-src="{{chat.face}}" style="width: 64px; height: 64px; margin-top:44px">
     <h2>{{chat.name}}</h2>
       
@@ -36,30 +22,7 @@
       {{chat.perH}}
       </span>
     <br>
-
-    
-    
-   
-
     {{chat.addTime}}
     </p>
-
-     
-    <!--
-      <div class="item tabs tabs-secondary tabs-icon-left sharing ">
-    <a class="tab-item sharing" href="#">
-      <i class="icon ion-thumbsup sharing"></i>
-      Like
-    </a>
-    <a class="tab-item sharing" href="#">
-      <i class="icon ion-chatbox sharing" ></i>
-      Comment
-    </a>
-    <a class="tab-item sharing" href="#">
-      <i class="icon ion-share sharing"></i>
-      Share
-    </a>
-  </div>
-  -->
   </ion-content>
 </ion-view>

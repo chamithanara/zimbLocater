@@ -1,63 +1,55 @@
-<ion-view title ="" class="bg-pane" ng-controller="LoginCtrl" >
-<!-- ng-style="{'background-image':'url({{bgSrc}})'}" -= -->
+<ion-view title ="" class="bg-pane" ng-controller="LoginCtrl" >   
+  <ion-content padding="true" class="scroll">
    
-    <ion-content padding="true" class="scroll">
-   
-<div class="hpaddding-100"></div>
-<div class="logo-login"><img style="max-width: 100%; max-height: 100%;" src="./img/mob-logo.png" /></div>
-<div class="row login-text" >
-<!--<p>{{descTxt}}</p>-->
-<!--<input type="text" placeholder="Enter Name">-->
-</div>
+    <div class="hpaddding-100"></div>
+    <div class="logo-login"><img style="max-width: 100%; max-height: 100%;" src="./img/mob-logo.png" /></div>
+    <div class="row login-text" >
+    </div>
 
-<div class="row">
-<div class="col hz-name center">
+    <div class="row">
+      <div class="col hz-name center">
 
-<center> 
-<!--
-<input type="text" class="text-input text-input--transparent" placeholder="Enter Name">
--->
-<form class="login-form" ng-submit="submitRegisterBasicForm(user)">
- <ion-list>   
-      <table>
-        <tr>
-          <td>
-            <input type="text" ng-model="user.name" placeholder="Enter Your Name">
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <input type="text" ng-model="user.address" placeholder="Enter Your Address">
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <input type="text" ng-model="user.telno" placeholder="Enter Mobile Number">
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <input type="email" ng-model="user.email" placeholder="Enter Your Email">
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <input type="password" ng-model="user.Password" placeholder="Enter Password">
-          </td>
-        </tr>
-        <tr>
-          <td>
-  	       <input type="password" ng-model="user.Re_Password" placeholder="Re-Enter Password">
-          </td>
-        </tr>
-      </table>
-   <input type="submit" class="button button-block button-calm" value="{{nextTxt}}">
- </ion-list>
-</form>
-</center>
+        <center> 
 
-</div>
-</div>
-</ion-content>
-   
+          <form class="login-form" ng-submit="submitRegisterBasicForm(user)">
+          <ion-list>   
+              <table>
+                <tr>
+                  <td>
+                    <input type="text" ng-model="user.name" placeholder="Enter Your Name">
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="text" ng-model="user.address" placeholder="Enter Your Address">
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="text" ng-model="user.telno" placeholder="Enter Mobile Number">
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="email" ng-model="user.email" placeholder="Enter Your Email">
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="password" ng-model="user.Password" placeholder="Enter Password">
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                  <input type="password" ng-model="user.Re_Password" placeholder="Re-Enter Password">
+                  </td>
+                </tr>
+              </table>
+              <input type="submit" class="button button-block button-calm" value="{{nextTxt}}">
+            </ion-list>
+          </form>
+        </center>
+      </div>
+    </div>
+  </ion-content>
 </ion-view>

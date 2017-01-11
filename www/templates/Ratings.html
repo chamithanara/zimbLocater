@@ -1,41 +1,39 @@
 <ion-view  class="list-bg">
+  <ion-nav-buttons side="left">
+    <button menu-toggle="left" class="button button-clear icon ion-navicon"></button>
+  </ion-nav-buttons>
 
- <ion-nav-buttons side="left">
-
-        <button menu-toggle="left" class="button button-clear icon ion-navicon"></button>
-
-</ion-nav-buttons>
-<ion-content class="scroll-content">
-<div class="stars center">
-  <h1 class="text-center">Rate Us!</h1>
-    <p class="text-center">Give us your value rating</p>
-      
-<!--  <form action="">
-    <input class="star star-5" id="star-5" type="radio" name="star"/>
-    <label class="star star-5" for="star-5"></label>
-    <input class="star star-4" id="star-4" type="radio" name="star"/>
-    <label class="star star-4" for="star-4"></label>
-    <input class="star star-3" id="star-3" type="radio" name="star"/>
-    <label class="star star-3" for="star-3"></label>
-    <input class="star star-2" id="star-2" type="radio" name="star"/>
-    <label class="star star-2" for="star-2"></label>
-    <input class="star star-1" id="star-1" type="radio" name="star"/>
-    <label class="star star-1" for="star-1"></label>
-      
+  <ion-content class="scroll-content">
+    <div class="stars center">
+      <h1 class="text-center">Rate Us!</h1>
+        <p class="text-center">Give us your value rating</p>
+          
+    <!--  <form action="">
+        <input class="star star-5" id="star-5" type="radio" name="star"/>
+        <label class="star star-5" for="star-5"></label>
+        <input class="star star-4" id="star-4" type="radio" name="star"/>
+        <label class="star star-4" for="star-4"></label>
+        <input class="star star-3" id="star-3" type="radio" name="star"/>
+        <label class="star star-3" for="star-3"></label>
+        <input class="star star-2" id="star-2" type="radio" name="star"/>
+        <label class="star star-2" for="star-2"></label>
+        <input class="star star-1" id="star-1" type="radio" name="star"/>
+        <label class="star star-1" for="star-1"></label>
+          
+          <div class="col">
+        <button class="button button-block button-positive">
+      Submit
+    </button>
+      </div>
+      </form>-->
+      <div style="font-size:35px;">
+      <rating ng-model="rating.rate" max="rating.max"></rating>
+      </div>
       <div class="col">
-    <button class="button button-block button-positive">
-  Submit
-</button>
-  </div>
-  </form>-->
-  <div style="font-size:35px;">
-  <rating ng-model="rating.rate" max="rating.max"></rating>
-  </div>
-  <div class="col">
-    <button class="button button-block button-positive" ng-click="AddRating()">
-  Submit
-</button>
-  </div>
-</div>
-</ion-content>
+        <button class="button button-block button-positive" ng-click="AddRating()">
+      Submit
+    </button>
+      </div>
+    </div>
+  </ion-content>
 </ion-view>

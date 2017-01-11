@@ -1,47 +1,35 @@
 <ion-view title ="" class="bg-pane" ng-controller="LoginCtrl" >
-<!-- ng-style="{'background-image':'url({{bgSrc}})'}" -= -->
+  <ion-content padding="true" class="scroll-content">
    
-<ion-content padding="true" class="scroll-content">
-   
-<div class="hpaddding-100"></div>
-<div class="logo-login"><img style="max-width: 100%; max-height: 100%;" src="./img/mob-logo.png" /></div>
-<div class="row login-text" >
-<!--<p>{{descTxt}}</p>-->
-<!--<input type="text" placeholder="Enter Name">-->
+    <div class="hpaddding-100"></div>
+    <div class="logo-login"><img style="max-width: 100%; max-height: 100%;" src="./img/mob-logo.png" /></div>
+    <div class="row login-text" >
+    </div>
 
+    <div class="row">
+      <div class="col hz-name center">
 
-</div>
+        <center> 
+          <form class="login-form" ng-submit="submitFormLogin(user)">
+          <ion-list>
+            <table>
+                  <tr>
+                    <td>
+                      <input type="text" ng-model="user.username" placeholder="Enter Username"></input>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <input type="password" ng-model="user.password" placeholder="Enter Password">
+                    </td>
+                  </tr>
+            </table>
+            
+            <input type="submit" class="button button-block button-calm" value="{{loginTxt}}">
+          </ion-list>
+          </form>
+        </center>
 
-<div class="row">
-<div class="col hz-name center">
-
-<center> 
-<!--
-<input type="text" class="text-input text-input--transparent" placeholder="Enter Name">
--->
-<form class="login-form" ng-submit="submitFormLogin(user)">
- <ion-list>
-   <table>
-        <tr>
-          <td>
-            <input type="text" ng-model="user.username" placeholder="Enter Username"></input>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <input type="password" ng-model="user.password" placeholder="Enter Password">
-          </td>
-        </tr>
-   </table>
-   
-   <input type="submit" class="button button-block button-calm" value="{{loginTxt}}">
- </ion-list>
-</form>
-</center>
- 
-    
-   
- 
   <!--
   <label class="item item-input item-floating-label">
     <span class="input-label">Last Name</span>
@@ -53,35 +41,7 @@
   </label>
   -->
 
-</div>
-</div>
-
-
-    <!-- <div class="row">
-      <div class="col ">
-      <center>
-          <button class="button button-outline login-button" ui-sref="app.dash">{{loginTxt}}</button>
-          -->
-          <!--<button class="button button-primary button-outline update-button " ng-click="checkForUpdates()">
-  Check for updates
-</button>
-          </center>
       </div>
     </div>
-
-      <div class="row">
-      <div class="col">
-      <center>
-
-         
-<button class="button button-stable button-block button-pulse update-button" ng-if="hasUpdate" ng-click="doUpdate()">
-  download update
-</button>-->
-<!--  </center>
-      </div>
-    </div>
-
-    -->
-    </ion-content>
-   
+  </ion-content>
 </ion-view>
