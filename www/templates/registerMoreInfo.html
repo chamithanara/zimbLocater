@@ -1,53 +1,54 @@
-<ion-view title ="" class="bg-pane" ng-controller="LoginCtrl" >
-    <ion-content padding="true" class="scroll">
-        <div class="hpaddding-100"></div>
-        <div class="logo-login"><img style="max-width: 100%; max-height: 100%;" src="./img/mob-logo.png" /></div>
-        <div class="row login-text" >
-        </div>
-
-        <div class="row">
-            <div class="col hz-name center">
-
-                <center> 
-                    <form class="login-form" ng-submit="submitRegisterMoreInfoMore(user)">
-                        <ion-list>   
-                            <table>
-                                <tr>
-                                <td>
-                                    <input type="text" ng-model="user.name" placeholder="Enter Your Name">
-                                </td>
-                                </tr>
-                                <tr>
-                                <td>
-                                    <input type="text" ng-model="user.address" placeholder="Enter Your Address">
-                                </td>
-                                </tr>
-                                <tr>
-                                <td>
-                                    <input type="text" ng-model="user.telno" placeholder="Enter Mobile Number">
-                                </td>
-                                </tr>
-                                <tr>
-                                <td>
-                                    <input type="email" ng-model="user.email" placeholder="Enter Your Email">
-                                </td>
-                                </tr>
-                                <tr>
-                                <td>
-                                    <input type="password" ng-model="user.Password" placeholder="Enter Password">
-                                </td>
-                                </tr>
-                                <tr>
-                                <td>
-                                <input type="password" ng-model="user.Re_Password" placeholder="Re-Enter Password">
-                                </td>
-                                </tr>
-                            </table>
-                            <input type="submit" class="button button-block button-calm" value="{{registerTxt}}">
-                        </ion-list>
-                    </form>
-                </center>
-            </div>
-        </div>
+<ion-view title ="" class="bg-pane" ng-controller="LoginCtrl" >  
+    <ion-content padding="true" class="padding scroll-content" >
+        <div class="wrapper row2">
+          <div id="container" class="clear">
+              <section id="about-intro" class="clear">
+                <div class="hpaddding-100"></div>
+                <div class="logo-login"><img style="max-width: 100%; max-height: 100%;" src="./img/mob-logo.png" /></div>
+                <h1 style="margin-bottom: 40px" class="text-center">Where are the Popos?</h1>  
+                <label class="item item-input item-stacked-label" style="padding: 10px;margin-bottom:20px">
+                    <span class="input-label" style="font-size:18px">Personal Information</span>
+                </label>    
+                <form class="login-form" ng-submit="submitRegisterMoreInfoMore(user)">
+                    <label class="item item-input item-stacked-label">
+                      <span class="input-label">Do you own a vehicle?</span>
+                      <ion-list>
+                        <ion-radio ng-model="ownVehicle" ng-value="1" style="width: 96%;">Yes</ion-radio>
+                        <ion-radio ng-model="ownVehicle" ng-value="2" style="width: 96%;">No</ion-radio>
+                      </ion-list>
+                    </label>
+                    <label class="item item-input item-stacked-label">
+                      <span class="input-label">Type of the Vehicle</span>
+                      <ion-list radio-grou>
+                        <ion-radio ng-model="vehicleType" ng-value="1" style="width: 96%;">Car</ion-radio>
+                        <ion-radio ng-model="vehicleType" ng-value="2" style="width: 96%;">Van</ion-radio>
+                        <ion-radio ng-model="vehicleType" ng-value="3" style="width: 96%;">Motor Bike</ion-radio>
+                        <ion-radio ng-model="vehicleType" ng-value="4" style="width: 96%;">Lorry</ion-radio>
+                        <ion-radio ng-model="vehicleType" ng-value="5" style="width: 96%;">Other</ion-radio>
+                      </ion-list>
+                    </label>
+                    <label class="item item-input item-stacked-label">
+                      <span class="input-label">Do you Drive Normally?</span>
+                      <ion-list>
+                        <ion-radio ng-model="driveNormally" ng-value="1" style="width: 96%;">Yes</ion-radio>
+                        <ion-radio ng-model="driveNormally" ng-value="2" style="width: 96%;">No</ion-radio>
+                      </ion-list>
+                    </label>
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Your Occupation</span>
+                        <input type="text" ng-model="occupation" placeholder="Occupation">
+                    </label>
+                    <label class="item item-input item-stacked-label">
+                      <span class="input-label">Are you an Alcoholic?</span>
+                      <ion-list>
+                        <ion-radio ng-model="alcoholic" ng-value="1" style="width: 96%;">Yes</ion-radio>
+                        <ion-radio ng-model="alcoholic" ng-value="2" style="width: 96%;">No</ion-radio>
+                      </ion-list>
+                    </label>
+                  <input type="submit" class="button button-block button-calm" style="margin-top:2%" value="{{registerTxt}}">
+              </form>
+            </section>
+          </div>
+       </div>
     </ion-content> 
 </ion-view>

@@ -1,28 +1,34 @@
 <ion-view  class="list-bg" style="margin-left:10px; padding:4px 18px 8px 1px">
-  <ion-nav-buttons side="left">
-    <button menu-toggle="left" class="button button-clear icon ion-navicon"></button>
-  </ion-nav-buttons>
+    <ion-nav-buttons side="left">
+      <button menu-toggle="left" class="button button-clear icon ion-navicon"></button>
+    </ion-nav-buttons>
 
-  <ion-content class="padding scroll-content">
-    <p></p>
-    <p></p>
-    <img ng-src="{{chat.face}}" style="width: 64px; height: 64px; margin-top:44px">
-    <h2>{{chat.name}}</h2>
-      
-      <p>{{chat.desc}}
-      <br>
-      <span class="left-details">{{chat.addCity}}, {{chat.addCountry}}</span>
-    </p>
-    <p>
-      {{chat.details}}
-      </p>
-    
-    <p>
-     <span class="perH">
-      {{chat.perH}}
-      </span>
-    <br>
-    {{chat.addTime}}
-    </p>
+    <ion-content has-header="true"  padding="true" class="padding scroll-content" >
+        <div class="wrapper row2">
+          <div id="container" class="clear">
+              <section id="about-intro" class="clear">
+                <p></p>
+                <p></p>
+                <img ng-src="{{chat.face}}" style="width: 64px; height: 64px; margin-top:44px">
+                <h2>{{chat.name}}</h2>
+                  
+                  <p>{{chat.desc}}
+                  <br>
+                  <span class="left-details">{{chat.addCity}}, {{chat.addCountry}}</span>
+                </p>
+                <p>
+                  {{chat.details}}
+                  </p>
+                
+                <p>
+                 <span class="perH">
+                  {{chat.perH}}
+                  </span>
+                <br>
+                {{chat.addTime}}
+                </p>
+              </section>
+          </div>
+      </div>
   </ion-content>
 </ion-view>

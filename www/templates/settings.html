@@ -3,12 +3,18 @@
     <button menu-toggle="left" class="button button-clear icon ion-navicon"></button>
   </ion-nav-buttons>
 
-  <ion-content class="scroll-content">
-    <ion-list>
-    <ion-item  style="margin-top:43px">Logged User: {{user.firstName}}</ion-item>
-    <ion-toggle  ng-model="settings.enableFriends">
-        Enable Friends
-    </ion-toggle>
-    </ion-list>
+  <ion-content padding="true" class="padding scroll-content" >
+      <div class="wrapper row2">
+        <div id="container" class="clear">
+            <section id="about-intro" class="clear">
+              <ion-list>
+              <ion-item  style="margin-top:43px">Logged User: {{user.firstName}}</ion-item>
+              <ion-toggle  ng-model="settings.enableFriends">
+                  Enable Friends
+              </ion-toggle>
+              </ion-list>
+            </section>
+         </div>
+      </div>
   </ion-content>
 </ion-view>

@@ -7,41 +7,34 @@ angular.module('starter.controllers', ['starter.services', 'ngOpenFB','ionic'])
   $scope.descTxt = "Find the service people";
   $scope.loginTxt = "Login";
   $scope.nextTxt = "Next";
-  $scope.registerTxt = "Register";
+  $scope.registerTxt = "Finish";
 
   $scope.user = {};
-
+  $scope.doRefresh = function(refresher) {
+     setTimeout(() => {
+      console.log('Async operation has ended');
+      refresher.complete();
+    }, 2000);
+  };
   $scope.submitFormLogin = function(user) {
-   if (user.username) {
      console.log("Submitting Form", user);
      formData.updateForm(user);
      console.log("Retrieving form from service", formData.getForm());
      $state.go('app.dash');
-   } else {
-     alert("Please fill out some information for the user");
-   }
  };
  
  $scope.submitRegisterBasicForm = function(user) {
-   if (user.name) {
      console.log("Submitting Form", user);
      formData.updateForm(user);
      console.log("Retrieving form from service", formData.getForm());
      $state.go('registerMoreInfo');
-   } else {
-     alert("Please fill out some information for the user");
-   }
  };
 
  $scope.submitRegisterMoreInfoMore = function(user) {
-   if (user.name) {
      console.log("Submitting Form", user);
      formData.updateForm(user);
      console.log("Retrieving form from service", formData.getForm());
      $state.go('app.login');
-   } else {
-     alert("Please fill out some information for the user");
-   }
  };
 })
 
@@ -193,19 +186,24 @@ angular.module('starter.controllers', ['starter.services', 'ngOpenFB','ionic'])
         });
   };
   
-  var template =  '<ion-popover-view style="width:98%; margin-left: -6px !important;">'+
-                  '<ion-header-bar style="width:100%; ">'+
-                    '<h1 class="title" style="text-align:center;">Please Select Your Tag Type</h1>'+
-                  '</ion-header-bar>'+
-                  '<ion-content scroll="false" style="width:100%; ">'+
-                    '<ion-radio ng-model="choice" style="margin-top: 42px;" ng-value="1">Police Check Point</ion-radio>'+
+  var template =  '<ion-popover-view style="width: 97%;margin-left: -0.5%;background-color: black;">'+
+//                  '<ion-header-bar style="width:100%; ">'+
+//                    '<h1 class="title" style="text-align:center;">Please Select Your Tag Type</h1>'+
+//                  '</ion-header-bar>'+
+                  '<ion-content padding="true" class="scroll-content" style="width:100%;" >'+
+                    '<div class="wrapper row2">'+
+                     ' <div>'+
+                          '<section id="about-intro" class="clear">'+
+                          '<h3 class="title" style="text-align:center;margin-top: 10px;color:white">Please Select Your Tag Type</h3>'+
+                  '<ion-radio ng-model="choice" style="margin-top: 15px;" ng-value="1">Police Check Point</ion-radio>'+
                   '<ion-radio ng-model="choice" ng-value="2">Robbery Prone Area</ion-radio>'+
                   '<ion-radio ng-model="choice" ng-value="3">Crime Scene</ion-radio>'+
                   '<ion-radio ng-model="choice" ng-value="4">Accident</ion-radio>'+
                   '<ion-radio ng-model="choice" ng-value="5">Big Pot Hole</ion-radio>'+
                   '<ion-radio ng-model="choice" ng-value="6">Disaster (Flooding/Fire)</ion-radio>'+
                   '<ion-radio ng-model="choice" ng-value="7">School Children</ion-radio>'+
-                  '<button class="button button-light button-android full" ng-click="AddTagToMap()" style="Width:100%">Confirm Tag</button>'+
+                  '<button class="button button-light button-android full" ng-click="AddTagToMap()" style="Width:100.05%">Confirm Tag</button>'+
+                  '</section></div></div>'+
                   '</ion-content>'+
                   '</ion-popover-view>';
 

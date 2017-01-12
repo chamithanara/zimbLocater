@@ -1,39 +1,41 @@
-<ion-view  class="list-bg">
+<ion-view  class="list-bg" style="margin-left:10px; padding:4px 18px 8px 1px">
+
   <ion-nav-buttons side="left">
     <button menu-toggle="left" class="button button-clear icon ion-navicon"></button>
   </ion-nav-buttons>
 
   <ion-content class="scroll-content">
-    <div class="stars center">
-      <h1 class="text-center">Rate Us!</h1>
-        <p class="text-center">Give us your value rating</p>
-          
-    <!--  <form action="">
-        <input class="star star-5" id="star-5" type="radio" name="star"/>
-        <label class="star star-5" for="star-5"></label>
-        <input class="star star-4" id="star-4" type="radio" name="star"/>
-        <label class="star star-4" for="star-4"></label>
-        <input class="star star-3" id="star-3" type="radio" name="star"/>
-        <label class="star star-3" for="star-3"></label>
-        <input class="star star-2" id="star-2" type="radio" name="star"/>
-        <label class="star star-2" for="star-2"></label>
-        <input class="star star-1" id="star-1" type="radio" name="star"/>
-        <label class="star star-1" for="star-1"></label>
-          
-          <div class="col">
-        <button class="button button-block button-positive">
-      Submit
-    </button>
-      </div>
-      </form>-->
-      <div style="font-size:35px;">
-      <rating ng-model="rating.rate" max="rating.max"></rating>
-      </div>
-      <div class="col">
-        <button class="button button-block button-positive" ng-click="AddRating()">
-      Submit
-    </button>
-      </div>
+      <div class="wrapper row2" style="margin-top:44px">
+        <div id="container" class="clear">
+          <div id="about-us" class="clear">
+            <section id="about-intro" class="clear">
+              <h1 style="margin-bottom: 40px" class="text-center">Rate Us</h1>
+              <div style="width:140px; height:140px; margin: auto;top: 0;left: 0;right: 0;bottom: 0; ">
+                <img style="max-width: 100%; max-height: 100%;" src="./img/mob-logo.png" />
+              </div>
+              
+              <div class="list">
+                <label class="item item-input item-stacked-label">
+                  <span class="input-label" style="font-size:20px">Please Select Your Rating*</span>
+                  <ion-list >
+                    <ion-radio ng-model="ratingVal" ng-value="1" style="width: 96%;">Very bad</ion-radio>
+                    <ion-radio ng-model="ratingVal" ng-value="2" style="width: 96%;">Need to Improve</ion-radio>
+                    <ion-radio ng-model="ratingVal" ng-value="3" style="width: 96%;">Neutral</ion-radio>
+                    <ion-radio ng-model="ratingVal" ng-value="4" style="width: 96%;">Good</ion-radio>
+                    <ion-radio ng-model="ratingVal" ng-value="5" style="width: 96%;">Excellent</ion-radio>
+                  </ion-list>
+                </label>
+                
+                <label class="item item-input item-stacked-label">
+                  <span class="input-label" style="font-size:20px">Add a Comment*</span>
+                  <input type="text" placeholder="Enter Comment Here..">
+                </label>
+              </div>
+    
+              <button class="button button-block button-positive" style="margin-top:2%" ng-click="AddRating()"> Submit </button>
+            </section>
+          </div>
+        </div>
     </div>
   </ion-content>
-</ion-view>
+</ion-view> 

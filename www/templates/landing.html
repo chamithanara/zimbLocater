@@ -1,47 +1,30 @@
 <ion-view title ="" class="bg-pane" ng-controller="LoginCtrl" >
-  <ion-content padding="true" class="scroll-content">
+  <ion-content padding="true" class="scroll-content" >
+      <div class="wrapper row2">
+        <div id="container" class="clear">
+            <section id="about-intro" class="clear">
    
-    <div class="hpaddding-100"></div>
-    <div class="logo-login"><img style="max-width: 100%; max-height: 100%;" src="./img/mob-logo.png" /></div>
-    <div class="row login-text" >
-    </div>
-
-    <div class="row">
-      <div class="col hz-name center">
-
-        <center> 
-          <form class="login-form" ng-submit="submitFormLogin(user)">
-          <ion-list>
-            <table>
-                  <tr>
-                    <td>
-                      <input type="text" ng-model="user.username" placeholder="Enter Username"></input>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <input type="password" ng-model="user.password" placeholder="Enter Password">
-                    </td>
-                  </tr>
-            </table>
-            
-            <input type="submit" class="button button-block button-calm" value="{{loginTxt}}">
-          </ion-list>
-          </form>
-        </center>
-
-  <!--
-  <label class="item item-input item-floating-label">
-    <span class="input-label">Last Name</span>
-    <input type="text" placeholder="Last Name">
-  </label>
-  <label class="item item-input item-floating-label">
-    <span class="input-label">Email</span>
-    <input type="text" placeholder="Email">
-  </label>
-  -->
-
+              <div class="hpaddding-100"></div>
+              <div class="logo-login"><img style="max-width: 100%; max-height: 100%;" src="./img/mob-logo.png" /></div>
+             
+              <h1 style="margin-bottom: 40px" class="text-center">Where are the Popos?</h1> 
+                <form class="login-form" ng-submit="submitFormLogin(user)">
+                <ion-list>
+                  
+                  <label class="item item-input item-stacked-label">
+                    <span class="input-label">Enter Username</span>
+                    <input type="text" ng-model="user.username" placeholder="Username">
+                  </label>
+                  <label class="item item-input item-stacked-label">
+                    <span class="input-label">Enter Your Password</span>
+                    <input type="text" ng-model="user.password" placeholder="Password">
+                  </label>
+                    
+                  <input type="submit" class="button button-block button-calm" style="margin-top:2%"  value="{{loginTxt}}">
+                </ion-list>
+                </form>
+            </section>
+          </div>
       </div>
-    </div>
   </ion-content>
 </ion-view>
