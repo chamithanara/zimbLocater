@@ -2,7 +2,7 @@
 .body{
   font-family: "Roboto";
 }
-.hpaddding-100{padding-top:50px;}
+.hpaddding-100{padding-top:40px;}
 
 #map {
     width: 100%;
@@ -138,18 +138,9 @@ ion-popover-view.fit ion-content {
 /* ====dashboard==== */
 
 div, p, .item p{color:#000; font-size: 14px;}
-h1, h2, .item, .item h2{/*font-size: 23px;*/ font-weight: bold; color:#bcc1c4;}
-
- .custom-dark h1{
-  
-    
- }
+h1, h2, .item, .item h2{/*font-size: 23px;*/ font-weight: bold; color:#bcc1c4;} 
  
- 
- 
- 
- 
- #about-us{display:block; width:100%; line-height:1.6em;}
+#about-us{display:block; width:100%; line-height:1.6em;}
 #about-us h2{margin-bottom:50px; padding-bottom:40px; font-size:80px; text-align:center; text-transform:uppercase; border-bottom:1px solid #CCCCCC;} /* DEMO USE ONLY - CAN BE DELETED */
 
 #about-us #about-intro{margin-bottom:50px;}

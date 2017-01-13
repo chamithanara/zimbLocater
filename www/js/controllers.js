@@ -187,9 +187,6 @@ angular.module('starter.controllers', ['starter.services', 'ngOpenFB','ionic'])
   };
   
   var template =  '<ion-popover-view style="width: 97%;margin-left: -0.5%;background-color: black;">'+
-//                  '<ion-header-bar style="width:100%; ">'+
-//                    '<h1 class="title" style="text-align:center;">Please Select Your Tag Type</h1>'+
-//                  '</ion-header-bar>'+
                   '<ion-content padding="true" class="scroll-content" style="width:100%;" >'+
                     '<div class="wrapper row2">'+
                      ' <div>'+
