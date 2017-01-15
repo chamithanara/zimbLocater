@@ -1,4 +1,4 @@
-<ion-view  class="list-bg" style="margin-left:10px; padding:4px 18px 8px 1px">
+<ion-view  class="list-bg bg-pane" style="margin-left:10px; padding:4px 18px 8px 1px">
 
   <ion-nav-buttons side="left">
     <button menu-toggle="left" class="button button-clear icon ion-navicon"></button>
@@ -9,13 +9,13 @@
         <div id="container" class="clear">
           <div id="about-us" class="clear">
             <section id="about-intro" class="clear">
-              <h1 style="margin-bottom: 20px" class="text-center">Rate Us</h1>
+              <h1 style="margin-bottom: 20px;color:black" class="text-center">Rate Us</h1>
               <div style="width:140px; height:140px; margin: auto;top: 0;left: 0;right: 0;bottom: 0; ">
                 <img style="max-width: 100%; max-height: 100%" src="./img/mob-logo.png" />
               </div>
               
               <div class="list" style="margin-top: 20px">
-                <label class="item item-input item-stacked-label">
+                <label class="item item-input item-stacked-label" style=";border: none">
                   <span class="input-label" style="font-size:20px">Please Select Your Rating*</span>
                   <ion-list >
                     <ion-radio ng-model="ratingVal" ng-value="1" style="width: 96%;">Very bad</ion-radio>
@@ -26,7 +26,7 @@
                   </ion-list>
                 </label>
                 
-                <label class="item item-input item-stacked-label">
+                <label class="item item-input item-stacked-label" style=";border: none">
                   <span class="input-label" style="font-size:20px">Add a Comment*</span>
                   <input type="text" placeholder="Enter Comment Here..">
                 </label>

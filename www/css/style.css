@@ -226,10 +226,6 @@ h1, h2, .item, .item h2{/*font-size: 23px;*/ font-weight: bold; color:#bcc1c4;}
   color:#00baff !important;
 }
 .bg-pane{background:url(../img/mob-background.png)no-repeat center center fixed; 
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
 }
 .button.button-calm {
     

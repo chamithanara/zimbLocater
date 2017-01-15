@@ -34,19 +34,7 @@ angular.module('starter', ['ionic', 'ionic.rating', 'starter.services', 'ionic.s
     // The GCM project number
    gcm_id: 'infinite-cache-92312'
   });
-
-  // initialize the firebase
-  var config = {
-    apiKey: "AIzaSyCBvS8OUXB1kehV2lqoL5GYCrPP4NuSXzY",
-    authDomain: "wherearethepopos.firebaseapp.com",
-    databaseURL: "https://wherearethepopos.firebaseio.com/",
-    storageBucket: "bucket.appspot.com"
-  };
-  firebase.initializeApp(config);
-
-  // Get a reference to the database service
-  var database = firebase.database();
-
+  
   $stateProvider
 
   .state('app', {

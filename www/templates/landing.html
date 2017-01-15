@@ -7,17 +7,17 @@
               <div class="hpaddding-100"></div>
               <div class="logo-login"><img style="max-width: 100%; max-height: 100%;" src="./img/mob-logo.png" /></div>
              
-              <h1 style="margin-bottom: 40px" class="text-center">Where are the Popos?</h1> 
+              <h1 style="margin-bottom: 40px; color:black" class="text-center">Where are the Popos?</h1> 
                 <form class="login-form" ng-submit="submitFormLogin(user)">
                 <ion-list>
-                  <label class="item item-input item-stacked-label text-center" style="padding: 10px;margin-bottom:20px">
+                  <label class="item item-input item-stacked-label text-center" style="padding: 10px;margin-bottom:20px;border: none">
                     <span class="input-label" style="font-size:18px">Login</span>
                   </label>
-                  <label class="item item-input item-stacked-label">
-                    <span class="input-label">Enter Username</span>
-                    <input type="text" ng-model="user.username" placeholder="Username">
+                  <label class="item item-input item-stacked-label" style="border:none">
+                    <span class="input-label">Enter Email</span>
+                    <input type="text" ng-model="user.email" placeholder="Email">
                   </label>
-                  <label class="item item-input item-stacked-label">
+                  <label class="item item-input item-stacked-label" style="border:none">
                     <span class="input-label">Enter Your Password</span>
                     <input type="text" ng-model="user.password" placeholder="Password">
                   </label>
@@ -29,4 +29,14 @@
           </div>
       </div>
   </ion-content>
+  
+  <ion-tabs class="tabs-dark tabs-icon-top">
+      <ion-tab title="Register" ng-click="redirectToRegister()" icon-on="ion-ios-personadd-outline">
+        <!-- Tab 1 content -->
+      </ion-tab>
+    
+      <ion-tab title="Login" ng-click="redirectToLogin()" icon-off="ion-ios-people">
+        <!-- Tab 2 content -->
+      </ion-tab>
+  </ion-tabs>
 </ion-view>

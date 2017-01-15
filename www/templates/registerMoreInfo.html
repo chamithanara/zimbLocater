@@ -5,50 +5,60 @@
               <section id="about-intro" class="clear">
                 <div class="hpaddding-100"></div>
                 <div class="logo-login"><img style="max-width: 100%; max-height: 100%;" src="./img/mob-logo.png" /></div>
-                <h1 style="margin-bottom: 40px" class="text-center">Where are the Popos?</h1>  
-                <label class="item item-input item-stacked-label text-center" style="padding: 10px;margin-bottom:20px">
+                <h1 style="margin-bottom: 40px; color:black" class="text-center" style=";border: none">Where are the Popos?</h1>  
+                <label class="item item-input item-stacked-label text-center"  style=";border: none" style="padding: 10px;margin-bottom:20px">
                     <span class="input-label" style="font-size:18px">Personal Information</span>
                 </label>    
-                <form class="login-form" ng-submit="submitRegisterMoreInfoMore(user)">
-                    <label class="item item-input item-stacked-label">
+                <form class="login-form" ng-submit="submitRegisterMoreInfoMore(userInfo)">
+                    <label class="item item-input item-stacked-label" style=";border: none">
                       <span class="input-label">Do you own a vehicle?</span>
-                      <ion-list>
-                        <ion-radio ng-model="ownVehicle" ng-value="1" style="width: 96%;">Yes</ion-radio>
-                        <ion-radio ng-model="ownVehicle" ng-value="2" style="width: 96%;">No</ion-radio>
+                      <ion-list radio-group>
+                        <ion-radio name="ownVehicle" ng-model="userInfo.ownVehicle" ng-value="1" style="width: 96%;">Yes</ion-radio>
+                        <ion-radio name="ownVehicle" ng-model="userInfo.ownVehicle" ng-value="2" style="width: 96%;">No</ion-radio>
                       </ion-list>
                     </label>
-                    <label class="item item-input item-stacked-label">
+                    <label class="item item-input item-stacked-label" style=";border: none">
                       <span class="input-label">Type of the Vehicle</span>
-                      <ion-list radio-grou>
-                        <ion-radio ng-model="vehicleType" ng-value="1" style="width: 96%;">Car</ion-radio>
-                        <ion-radio ng-model="vehicleType" ng-value="2" style="width: 96%;">Van</ion-radio>
-                        <ion-radio ng-model="vehicleType" ng-value="3" style="width: 96%;">Motor Bike</ion-radio>
-                        <ion-radio ng-model="vehicleType" ng-value="4" style="width: 96%;">Lorry</ion-radio>
-                        <ion-radio ng-model="vehicleType" ng-value="5" style="width: 96%;">Other</ion-radio>
+                      <ion-list radio-group>
+                        <ion-radio name="vehicleType" ng-model="userInfo.vehicleType" ng-value="1" style="width: 96%;">Car</ion-radio>
+                        <ion-radio name="vehicleType" ng-model="userInfo.vehicleType" ng-value="2" style="width: 96%;">Van</ion-radio>
+                        <ion-radio name="vehicleType" ng-model="userInfo.vehicleType" ng-value="3" style="width: 96%;">Motor Bike</ion-radio>
+                        <ion-radio name="vehicleType" ng-model="userInfo.vehicleType" ng-value="4" style="width: 96%;">Lorry</ion-radio>
+                        <ion-radio name="vehicleType" ng-model="userInfo.vehicleType" ng-value="5" style="width: 96%;">Other</ion-radio>
                       </ion-list>
                     </label>
-                    <label class="item item-input item-stacked-label">
+                    <label class="item item-input item-stacked-label" style=";border: none">
                       <span class="input-label">Do you Drive Normally?</span>
-                      <ion-list>
-                        <ion-radio ng-model="driveNormally" ng-value="1" style="width: 96%;">Yes</ion-radio>
-                        <ion-radio ng-model="driveNormally" ng-value="2" style="width: 96%;">No</ion-radio>
+                      <ion-list radio-group>
+                        <ion-radio name="driveNormally" ng-model="userInfo.driveNormally" ng-value="1" style="width: 96%;">Yes</ion-radio>
+                        <ion-radio name="driveNormally" ng-model="userInfo.driveNormally" ng-value="2" style="width: 96%;">No</ion-radio>
                       </ion-list>
                     </label>
-                    <label class="item item-input item-stacked-label">
+                    <label class="item item-input item-stacked-label" style=";border: none">
                       <span class="input-label">Are you an Alcoholic?</span>
-                      <ion-list>
-                        <ion-radio ng-model="alcoholic" ng-value="1" style="width: 96%;">Yes</ion-radio>
-                        <ion-radio ng-model="alcoholic" ng-value="2" style="width: 96%;">No</ion-radio>
+                      <ion-list radio-group>
+                        <ion-radio name="alcoholic" ng-model="userInfo.alcoholic" ng-value="1" style="width: 96%;">Yes</ion-radio>
+                        <ion-radio name="alcoholic" ng-model="userInfo.alcoholic" ng-value="2" style="width: 96%;">No</ion-radio>
                       </ion-list>
                     </label>
-                    <label class="item item-input item-stacked-label">
+                    <label class="item item-input item-stacked-label" style=";border: none">
                         <span class="input-label">Your Occupation</span>
-                        <input type="text" ng-model="occupation" placeholder="Occupation">
+                        <input type="text" ng-model="userInfo.occupation" placeholder="Occupation">
                     </label>
-                  <input type="submit" class="button button-block button-calm" style="margin-top:2%" value="{{registerTxt}}">
+                  <input type="submit" class="button button-block button-calm" style="margin-top:2%;margin-bottom: 5%;" value="{{registerTxt}}">
               </form>
             </section>
           </div>
        </div>
     </ion-content> 
+    
+    <ion-tabs class="tabs-dark tabs-icon-top">
+      <ion-tab title="Register" ng-click="redirectToRegister()" icon-on="ion-person-add">
+        <!-- Tab 1 content -->
+      </ion-tab>
+    
+      <ion-tab title="Login" ng-click="redirectToLogin()" icon-off="ion-ios-people">
+        <!-- Tab 2 content -->
+      </ion-tab>
+  </ion-tabs>
 </ion-view>

@@ -1,23 +1,77 @@
+var database = null;
+
 angular.module('starter.services', [])
 
-.service('formData', function() {
+.run(function($ionicPlatform,  $ionicAnalytics, ngFB) {
+  // initialize the firebase
+  var config = {
+    apiKey: "AIzaSyCBvS8OUXB1kehV2lqoL5GYCrPP4NuSXzY",
+    authDomain: "wherearethepopos.firebaseapp.com",
+    databaseURL: "https://wherearethepopos.firebaseio.com",
+    storageBucket: "wherearethepopos.appspot.com",
+  };
+  firebase.initializeApp(config);
+
+  // Get a reference to the database service
+  database = firebase.database();
+})
+
+.service('formData', function($state) {
  return {
-   form: {},
-   getForm: function() {
-     return this.form;
+   RegsiterForm: function(userPersonaldata) {
+     firebase.auth().createUserWithEmailAndPassword(userPersonaldata.email, userPersonaldata.password)
+     .then(function(readCountTxn) {
+        $state.go('app.login');
+        $window.localStorage.setItem("isRegistered", true);
+     }, function(error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        if (errorCode == 'weak-password') {
+          alert('The password is too weak.');
+        } 
+        else if (errorCode == 'invalid-email')
+        {
+          alert('email address is not valid.');
+        }
+        else if (errorCode == 'email-already-in-use')
+        {
+          alert('Already exists an account with the given email address.');
+        }
+        else {  
+          alert(errorMessage);
+        }
+        
+        $state.go('home');
+     });
    },
-   updateForm: function(form) {
-     this.form = form;
-   }
+   
+   LoginForm: function(user) {
+     firebase.auth().signInWithEmailAndPassword(user.email, user.password)
+     .then(function(readCountTxn) {
+        $state.go('app.dash');
+        $window.localStorage.setItem("isLoggedIn", true);
+     }, function(error) {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        if (errorCode === 'wrong-password') {
+          alert('Wrong password.');
+        }if (errorCode === 'invalid-email') {
+          alert('Email address is not valid.');
+        }if (errorCode === 'user-disabled') {
+          alert('Given email has been disabled.');
+        }if (errorCode === 'user-not-found') {
+          alert('No user corresponding to the given email.');
+        } else {
+          alert(errorMessage);
+        }
+        console.log(error);
+      });
+    }
  }
 })
 
 .factory('Chats', function() {
-  // Might use a resource here that returns a JSON array
- 
-  // Some fake testing data
-
-  /* https://raw.githubusercontent.com/asimkh/apps/master/Hazzir/www */
 
   var users = [{
     id: 0,
@@ -30,70 +84,8 @@ angular.module('starter.services', [])
     addCity: 'City',
     addCountry: 'Country'
 
-  }, {
-    id: 1,
-    name: 'dolor sit',
-    desc: 'adipiscing elit',
-    perH: 'XXXX',
-    details:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id eleifend elit. Integer ultrices pharetra sem, nec tincidunt diam maximus quis. Donec vehicula tempus .nunc, a viverra felis mattis sodales. Mauris quis scelerisque eros. Cras aliquam gravida rutrum. Donec congue libero sit amet dictum viverra. Morbi feugiat finibus felis, sed efficitur purus. Sed placerat massa sem, id venenatis lectus ',
-    face: './img/thumb-m.png',
-    addTime: '30 mins',
-   addCity: 'Morbi id ',
-    addCountry: 'consectetur adipiscing'
-  }, {
-    id: 2,
-    name: 'dolor sit',
-    desc: 'adipiscing elit',
-    perH: 'XXXX',
-    details:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id eleifend elit. Integer ultrices pharetra sem, nec tincidunt diam maximus quis. Donec vehicula tempus .nunc, a viverra felis mattis sodales. Mauris quis scelerisque eros. Cras aliquam gravida rutrum. Donec congue libero sit amet dictum viverra. Morbi feugiat finibus felis, sed efficitur purus. Sed placerat massa sem, id venenatis lectus ',
-    face: './img/thumb-m.png',
-    addTime: '30 mins',
-    addCity: 'Morbi id ',
-    addCountry: 'consectetur adipiscing'
-  }, {
-    id: 3,
-    name: 'dolor sit',
-    desc: 'adipiscing elit',
-   perH: 'XXXX',
-    details:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id eleifend elit. Integer ultrices pharetra sem, nec tincidunt diam maximus quis. Donec vehicula tempus .nunc, a viverra felis mattis sodales. Mauris quis scelerisque eros. Cras aliquam gravida rutrum. Donec congue libero sit amet dictum viverra. Morbi feugiat finibus felis, sed efficitur purus. Sed placerat massa sem, id venenatis lectus ',
-    face: './img/thumb-m.png',
-    addTime: '30 mins',
-    addCity: 'Morbi id ',
-    addCountry: 'consectetur adipiscing'
-  }, {
-    id: 4,
-    name: 'dolor sit',
-    desc: 'adipiscing elit',
-    perH: 'XXXX',
-    details:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id eleifend elit. Integer ultrices pharetra sem, nec tincidunt diam maximus quis. Donec vehicula tempus .nunc, a viverra felis mattis sodales. Mauris quis scelerisque eros. Cras aliquam gravida rutrum. Donec congue libero sit amet dictum viverra. Morbi feugiat finibus felis, sed efficitur purus. Sed placerat massa sem, id venenatis lectus ',
-    face: './img/thumb-m.png',
-    addTime: '30 mins',
-    addCity: 'Morbi id ',
-    addCountry: 'consectetur adipiscing'
-  },
-  {
-    id: 5,
-    name: 'dolor sit',
-    desc: 'adipiscing elit',
-    perH: 'XXXX',
-    details:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id eleifend elit. Integer ultrices pharetra sem, nec tincidunt diam maximus quis. Donec vehicula tempus .nunc, a viverra felis mattis sodales. Mauris quis scelerisque eros. Cras aliquam gravida rutrum. Donec congue libero sit amet dictum viverra. Morbi feugiat finibus felis, sed efficitur purus. Sed placerat massa sem, id venenatis lectus ',
-    face: './img/thumb-m.png',
-    addTime: '30 mins',
-    addCity: 'Morbi id ',
-    addCountry: 'consectetur adipiscing'
-  },
-  {
-    id: 6,
-    name: 'dolor sit',
-    desc: 'adipiscing elit',
-    perH: 'XXXX',
-    details:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id eleifend elit. Integer ultrices pharetra sem, nec tincidunt diam maximus quis. Donec vehicula tempus .nunc, a viverra felis mattis sodales. Mauris quis scelerisque eros. Cras aliquam gravida rutrum. Donec congue libero sit amet dictum viverra. Morbi feugiat finibus felis, sed efficitur purus. Sed placerat massa sem, id venenatis lectus ',
-    face: './img/thumb-m.png',
-    addTime: '30 mins',
-    addCity: 'Morbi id ',
-   addCountry: 'consectetur adipiscing'
   }];
-
+  
   return {
     all: function() {
       return users;

@@ -1,80 +1,110 @@
+var userBasicInfo = {};
+
 angular.module('starter.controllers', ['starter.services', 'ngOpenFB','ionic'])
 
 .controller("LoginCtrl", function($scope, $state, formData) {
- 
-  $scope.logoSrc = '/img/mob-logo.png';
-  $scope.bgSrc = '/img/mob-background.png';
-  $scope.descTxt = "Find the service people";
-  $scope.loginTxt = "Login";
-  $scope.nextTxt = "Next";
-  $scope.registerTxt = "Finish";
-
-  $scope.user = {};
-  $scope.doRefresh = function(refresher) {
-     setTimeout(() => {
-      console.log('Async operation has ended');
-      refresher.complete();
-    }, 2000);
-  };
-  $scope.submitFormLogin = function(user) {
-     console.log("Submitting Form", user);
-     formData.updateForm(user);
-     console.log("Retrieving form from service", formData.getForm());
-     $state.go('app.dash');
- };
- 
- $scope.submitRegisterBasicForm = function(user) {
-     console.log("Submitting Form", user);
-     formData.updateForm(user);
-     console.log("Retrieving form from service", formData.getForm());
-     $state.go('registerMoreInfo');
- };
-
- $scope.submitRegisterMoreInfoMore = function(user) {
-     console.log("Submitting Form", user);
-     formData.updateForm(user);
-     console.log("Retrieving form from service", formData.getForm());
+//   if (window.localStorage.getItem('isRegistered') && window.localStorage.getItem('isLoggedIn'))
+//   {
+//      $state.go('app.dash');     
+//   }
+   
+   /////////////// Development 
+   // $state.go('app.dash');
+   ///////////////////////////
+   
+   $scope.logoSrc = '/img/mob-logo.png';
+   $scope.bgSrc = '/img/mob-background.png';
+   $scope.descTxt = "Find the service people";
+   $scope.loginTxt = "Login";
+   $scope.nextTxt = "Next";
+   $scope.registerTxt = "Finish";
+   
+   $scope.redirectToLogin = function () {
      $state.go('app.login');
- };
-})
-
-/* ---- menu controller -- */
-.controller('NavController', function($scope, $ionicSideMenuDelegate) {
-    $scope.toggleLeft = function() {
-      $ionicSideMenuDelegate.toggleLeft();
-    };
-})
-
-/* ---- tabs controller -- */
-.controller('TabCtrl', function($scope,  $state){
-
-  $scope.gotoHome = function() {
-    console.log('logout');
-     $state.go('home', {url: 'templates/landing.html'})
-  }
-
-  $scope.gotoDash = function() {
-    console.log('tab > Dash');
-     
-  }
-
-  $scope.gotoList = function() {
-    console.log('tab > List');
-     
-  }
-
-  $scope.gotoSettings = function() {
-    console.log('tab > Settings');
-     
-  }
+   };
+   
+   $scope.redirectToRegister = function () {
+     $state.go('home');
+   };
+   
+   $scope.user = {};
+   $scope.doRefresh = function(refresher) {
+       setTimeout(() => {
+        console.log('Async operation has ended');
+        refresher.complete();
+     }, 2000);
+   };
+  
+   $scope.submitFormLogin = function(user) {
+     if (user.email == undefined || user.password == undefined )
+       {
+          alert('Please enter email/password');
+       }
+       else
+       {
+          formData.LoginForm(user);         
+       }
+   };
+   
+   $scope.submitRegisterBasicForm = function(user) {
+       if (user.email == undefined || user.password == undefined )
+       {
+          alert('Please enter email/password');
+       }
+       else if (user.password != user.re_password)
+       {
+          alert('Passwords do not match');
+       }
+       else
+       {
+          userBasicInfo = user;
+          $state.go('registerMoreInfo');         
+       }
+   };
+  
+   $scope.submitRegisterMoreInfoMore = function(user) {
+       formData.RegsiterForm(userBasicInfo);          
+   };
+  })
+  
+  /* ---- menu controller -- */
+  .controller('NavController', function($scope, $ionicSideMenuDelegate) {
+      $scope.toggleLeft = function() {
+        $ionicSideMenuDelegate.toggleLeft();
+      };
+  })
+  
+  /* ---- tabs controller -- */
+  .controller('TabCtrl', function($scope,  $state){
+  
+    $scope.gotoHome = function() {
+      console.log('logout');
+       $state.go('home', {url: 'templates/landing.html'})
+    }
+  
+    $scope.gotoDash = function() {
+      console.log('tab > Dash');
+       
+    }
+  
+    $scope.gotoList = function() {
+      console.log('tab > List');
+       
+    }
+  
+    $scope.gotoSettings = function() {
+      console.log('tab > Settings');
+       
+    }
 })
 
 /* ---- dashboard  -- */
 .controller('DashCtrl', function($scope, $stateParams, $ionicPopup, ngFB, $state, $ionicModal, $timeout, $state, $ionicSideMenuDelegate, formData, $ionicPopover) {
   $scope.ContinueTxt = "Continue";
   console.log("loading...Dashboard")
-  $scope.user = formData.getForm();
-
+  
+  var user = firebase.auth().currentUser;
+  
   var latitude = null;
   var longitude = null;
   
@@ -329,7 +359,6 @@ angular.module('starter.controllers', ['starter.services', 'ngOpenFB','ionic'])
 .controller('AccountCtrl', function($scope, $ionicSideMenuDelegate, formData) {
 
  console.log("loading....settings")
- $scope.user = formData.getForm();
    //$state.go('tab.chats');
    //$state.go('tab.dash', {url: 'templates/tab-dash.html'})
   
