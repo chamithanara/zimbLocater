@@ -1,6 +1,6 @@
 var appVersion = "0.0.0";
 
-angular.module('starter', ['ionic', 'ionic.rating', 'starter.services', 'ionic.service.core', 'ionic.service.analytics','ionic.service.push', 'starter.controllers','ngCordova', 'ngOpenFB'])
+angular.module('starter', ['ionic', 'ionic.rating', 'starter.services', 'auth.services', 'ionic.service.core', 'ionic.service.analytics','ionic.service.push', 'starter.controllers','ngCordova', 'ngOpenFB'])
 
 .run(function($ionicPlatform,  $ionicAnalytics, ngFB) {
   ngFB.init({appId: '970200256375080'});

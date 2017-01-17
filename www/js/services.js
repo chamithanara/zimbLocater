@@ -103,3 +103,29 @@ angular.module('starter.services', [])
     }
   };
 });
+
+angular.module('auth.services', [])
+.factory('Auth', function () {
+   var _user = null;
+   if (window.localStorage['session']) {
+      _user = JSON.parse(window.localStorage['session']);
+   }
+
+   return {
+      setUser: function (session) {
+        _user = session;
+        window.localStorage['session'] = JSON.stringify(_user);
+      },
+      isLoggedIn: function () {
+         return _user ? true : false;
+      },
+      getUser: function () {
+         return _user;
+      },
+      logout: function () {
+         window.localStorage.removeItem("session");
+         window.localStorage.removeItem("list_dependents");
+         _user = null;
+      }
+   }
+});

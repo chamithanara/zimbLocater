@@ -1,17 +1,18 @@
 var userBasicInfo = {};
 
-angular.module('starter.controllers', ['starter.services', 'ngOpenFB','ionic'])
+angular.module('starter.controllers', ['starter.services','auth.services', 'ngOpenFB','ionic'])
 
-.controller("LoginCtrl", function($scope, $state, formData) {
-//   if (window.localStorage.getItem('isRegistered') && window.localStorage.getItem('isLoggedIn'))
-//   {
-//      $state.go('app.dash');     
-//   }
+.controller("LoginCtrl", function($scope, $state, formData, $cordovaFile, Auth) {
+  if (Auth.isLoggedIn())
+  {
+     $state.go('app.dash');     
+  }
    
    /////////////// Development 
    // $state.go('app.dash');
    ///////////////////////////
    
+
    $scope.logoSrc = '/img/mob-logo.png';
    $scope.bgSrc = '/img/mob-background.png';
    $scope.descTxt = "Find the service people";
@@ -58,12 +59,14 @@ angular.module('starter.controllers', ['starter.services', 'ngOpenFB','ionic'])
        else
        {
           userBasicInfo = user;
+          Auth.setUser(userBasicInfo);
           $state.go('registerMoreInfo');         
        }
    };
   
    $scope.submitRegisterMoreInfoMore = function(user) {
-       formData.RegsiterForm(userBasicInfo);          
+       var s = Auth.getUser();  
+       formData.RegsiterForm(userBasicInfo);        
    };
   })
   
