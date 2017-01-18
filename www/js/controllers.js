@@ -5,10 +5,10 @@ var userMoreInfo = null;
 angular.module('starter.controllers', ['starter.services','auth.services', 'ngOpenFB','ionic'])
 
 .controller("LoginCtrl", function($scope, $state, formData, $cordovaFile, Auth) {
-   if (Auth.isLoggedIn())
-   {
-      $state.go('app.dash');     
-   }
+//   if (Auth.isLoggedIn())
+//   {
+//      $state.go('app.dash');     
+//   }
    
    /////////////// Development 
    // $state.go('app.dash');

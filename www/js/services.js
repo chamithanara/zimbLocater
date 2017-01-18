@@ -24,16 +24,16 @@ angular.module('starter.services', [])
         $state.go('app.login');
 
         // save user to the database
-        firebase.database().ref('users/' + userId).set({
-          email: userBasicInfo.email,
-          name: userBasicInfo.name,
-          address: userBasicInfo.address,
-          mobileNum: userBasicInfo.telno,
-          isHaveOwnVehicle: userMoreInfo.ownVehicle,
-          vehicleType: userMoreInfo.vehicleType,
-          driveNomally: userMoreInfo.driveNomally,
-          isAlcoholic: userMoreInfo.alcoholic,
-          occupation: userMoreInfo.occupation
+        database.ref('users/' + userId).set({
+          "email": userBasicInfo.email,
+          "name": userBasicInfo.name,
+          "address": userBasicInfo.address,
+          "mobileNum": userBasicInfo.telno,
+          "isHaveOwnVehicle": userMoreInfo.ownVehicle,
+          "vehicleType": userMoreInfo.vehicleType,
+          "driveNomally": userMoreInfo.driveNormally,
+          "isAlcoholic": userMoreInfo.alcoholic,
+          "occupation": userMoreInfo.occupation
         });
 
      }, function(error) {
@@ -59,7 +59,7 @@ angular.module('starter.services', [])
      });
    },
    
-   LoginForm: function(userId, userBasicInfo, userMoreInfo, user) {
+   LoginForm: function(user) {
      firebase.auth().signInWithEmailAndPassword(user.email, user.password)
      .then(function(readCountTxn) {
         $state.go('app.dash');
