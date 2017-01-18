@@ -112,8 +112,8 @@ angular.module('auth.services', [])
    }
 
    return {
-      setUser: function (session) {
-        _user = session;
+      setUser: function (userId) {
+        _user = { "name" : userId };
         window.localStorage['session'] = JSON.stringify(_user);
       },
       isLoggedIn: function () {

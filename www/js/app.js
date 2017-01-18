@@ -2,7 +2,7 @@ var appVersion = "0.0.0";
 
 angular.module('starter', ['ionic', 'ionic.rating', 'starter.services', 'auth.services', 'ionic.service.core', 'ionic.service.analytics','ionic.service.push', 'starter.controllers','ngCordova', 'ngOpenFB'])
 
-.run(function($ionicPlatform,  $ionicAnalytics, ngFB) {
+.run(function($ionicPlatform, $ionicAnalytics, ngFB, Auth, $state, $rootScope) {
   ngFB.init({appId: '970200256375080'});
 
   $ionicPlatform.ready(function() {
@@ -17,7 +17,7 @@ angular.module('starter', ['ionic', 'ionic.rating', 'starter.services', 'auth.se
       // org.apache.cordova.statusbar required
       StatusBar.styleLightContent();
     }
-  });
+  });  
 })
 
 .config(function($stateProvider, $urlRouterProvider, $ionicAppProvider, $ionicConfigProvider) {
@@ -117,7 +117,7 @@ angular.module('starter', ['ionic', 'ionic.rating', 'starter.services', 'auth.se
     views: {
       'menuContent': {
         templateUrl: 'templates/landing.html',
-        controller: 'landingCtrl'
+        controller: 'LoginCtrl'
       }
     }
   });
@@ -125,14 +125,14 @@ angular.module('starter', ['ionic', 'ionic.rating', 'starter.services', 'auth.se
   $stateProvider
       .state('home', {
           url: '/',
-          controller: 'landingCtrl',
+          controller: 'LoginCtrl',
           templateUrl: 'templates/Register.html'
   });
 
   $stateProvider
       .state('registerMoreInfo', {
           url: '/',
-          controller: 'landingCtrl',
+          controller: 'LoginCtrl',
           templateUrl: 'templates/registerMoreInfo.html'
   });
 

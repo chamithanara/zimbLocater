@@ -1,18 +1,18 @@
 var userBasicInfo = {};
+var userId = null;
 
 angular.module('starter.controllers', ['starter.services','auth.services', 'ngOpenFB','ionic'])
 
 .controller("LoginCtrl", function($scope, $state, formData, $cordovaFile, Auth) {
-  if (Auth.isLoggedIn())
-  {
-     $state.go('app.dash');     
-  }
+   if (Auth.isLoggedIn())
+   {
+      $state.go('app.dash');     
+   }
    
    /////////////// Development 
    // $state.go('app.dash');
    ///////////////////////////
    
-
    $scope.logoSrc = '/img/mob-logo.png';
    $scope.bgSrc = '/img/mob-background.png';
    $scope.descTxt = "Find the service people";
@@ -43,7 +43,8 @@ angular.module('starter.controllers', ['starter.services','auth.services', 'ngOp
        }
        else
        {
-          formData.LoginForm(user);         
+          formData.LoginForm(user);             
+          Auth.setUser(userId);     
        }
    };
    
@@ -59,35 +60,66 @@ angular.module('starter.controllers', ['starter.services','auth.services', 'ngOp
        else
        {
           userBasicInfo = user;
-          Auth.setUser(userBasicInfo);
           $state.go('registerMoreInfo');         
        }
    };
   
    $scope.submitRegisterMoreInfoMore = function(user) {
-       var s = Auth.getUser();  
-       formData.RegsiterForm(userBasicInfo);        
+       formData.RegsiterForm(userBasicInfo);  
+       userId = IDGenerator();       
    };
+   
+   function IDGenerator() 
+   {	 
+		 this.length = 8;
+		 this.timestamp = +new Date;
+		 
+		 var _getRandomInt = function( min, max ) 
+     {
+			 return Math.floor( Math.random() * ( max - min + 1 ) ) + min;
+		 }
+		 
+		 var ts = this.timestamp.toString();
+		 var parts = ts.split( "" ).reverse();
+		 var id = "";
+		 
+		 for( var i = 0; i < this.length; ++i ) 
+     {
+			 var index = _getRandomInt( 0, parts.length - 1 );
+			 id += parts[index];	 
+		 }
+		 
+		 return id;		 
+	 }   
   })
   
   /* ---- menu controller -- */
-  .controller('NavController', function($scope, $ionicSideMenuDelegate) {
+  .controller('NavController', function($scope, $ionicSideMenuDelegate, $state, Auth) {
       $scope.toggleLeft = function() {
-        $ionicSideMenuDelegate.toggleLeft();
+        toggleLeftFunc();
       };
+      
+      $scope.logoutUser = function() {
+        Auth.logout();  
+        $state.go('app.login');
+        toggleLeftFunc();
+      }
+      
+      function toggleLeftFunc(){
+          $ionicSideMenuDelegate.toggleLeft();
+      }
   })
   
   /* ---- tabs controller -- */
   .controller('TabCtrl', function($scope,  $state){
   
     $scope.gotoHome = function() {
-      console.log('logout');
+       console.log('logout');
        $state.go('home', {url: 'templates/landing.html'})
     }
   
     $scope.gotoDash = function() {
       console.log('tab > Dash');
-       
     }
   
     $scope.gotoList = function() {
