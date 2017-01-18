@@ -18,11 +18,24 @@ angular.module('starter.services', [])
 
 .service('formData', function($state) {
  return {
-   RegsiterForm: function(userPersonaldata) {
-     firebase.auth().createUserWithEmailAndPassword(userPersonaldata.email, userPersonaldata.password)
-     .then(function(readCountTxn) {
+   RegsiterForm: function(userId, userBasicInfo, userMoreInfo, user) {
+     firebase.auth().createUserWithEmailAndPassword(userBasicInfo.email, userBasicInfo.password)
+     .then(function(readCountTxn) {        
         $state.go('app.login');
-        $window.localStorage.setItem("isRegistered", true);
+
+        // save user to the database
+        firebase.database().ref('users/' + userId).set({
+          email: userBasicInfo.email,
+          name: userBasicInfo.name,
+          address: userBasicInfo.address,
+          mobileNum: userBasicInfo.telno,
+          isHaveOwnVehicle: userMoreInfo.ownVehicle,
+          vehicleType: userMoreInfo.vehicleType,
+          driveNomally: userMoreInfo.driveNomally,
+          isAlcoholic: userMoreInfo.alcoholic,
+          occupation: userMoreInfo.occupation
+        });
+
      }, function(error) {
         // Handle Errors here.
         var errorCode = error.code;
@@ -46,11 +59,11 @@ angular.module('starter.services', [])
      });
    },
    
-   LoginForm: function(user) {
+   LoginForm: function(userId, userBasicInfo, userMoreInfo, user) {
      firebase.auth().signInWithEmailAndPassword(user.email, user.password)
      .then(function(readCountTxn) {
         $state.go('app.dash');
-        $window.localStorage.setItem("isLoggedIn", true);
+
      }, function(error) {
         var errorCode = error.code;
         var errorMessage = error.message;
@@ -65,6 +78,7 @@ angular.module('starter.services', [])
         } else {
           alert(errorMessage);
         }
+
         console.log(error);
       });
     }
@@ -72,7 +86,6 @@ angular.module('starter.services', [])
 })
 
 .factory('Chats', function() {
-
   var users = [{
     id: 0,
     name: 'Profile Name',
@@ -112,9 +125,28 @@ angular.module('auth.services', [])
    }
 
    return {
-      setUser: function (userId) {
-        _user = { "name" : userId };
-        window.localStorage['session'] = JSON.stringify(_user);
+      setUser: function (email, userId) {
+        _user = { "user": { "email": email, "userId": userId } };
+
+        var userExists = false;
+        if (window.localStorage['session'] != undefined){
+          angular.forEach(JSON.parse(window.localStorage['session']), function(keyOuter, valueOuter) {
+            angular.forEach(keyOuter, function(keyInner, valueInner) {
+              if (keyInner === email) {
+                userExists = true;
+                // $scope.results.push({serial: key, owner: value[0].Owner});
+              }
+            });
+          });
+        }
+        else {
+          window.localStorage['session'] = JSON.stringify(_user);
+        }
+
+        if (!userExists && window.localStorage['session'] != undefined){
+          ///////// not working - not concatinating the user
+           window.localStorage['session'] = angular.extend(window.localStorage['session'], JSON.stringify(_user));
+        }
       },
       isLoggedIn: function () {
          return _user ? true : false;
@@ -123,8 +155,8 @@ angular.module('auth.services', [])
          return _user;
       },
       logout: function () {
-         window.localStorage.removeItem("session");
-         window.localStorage.removeItem("list_dependents");
+         // window.localStorage.removeItem("session");
+         //window.localStorage.removeItem("list_dependents");
          _user = null;
       }
    }

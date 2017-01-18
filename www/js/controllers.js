@@ -1,5 +1,6 @@
 var userBasicInfo = {};
 var userId = null;
+var userMoreInfo = null;
 
 angular.module('starter.controllers', ['starter.services','auth.services', 'ngOpenFB','ionic'])
 
@@ -44,7 +45,7 @@ angular.module('starter.controllers', ['starter.services','auth.services', 'ngOp
        else
        {
           formData.LoginForm(user);             
-          Auth.setUser(userId);     
+          Auth.setUser(user.email, userId);     
        }
    };
    
@@ -64,9 +65,10 @@ angular.module('starter.controllers', ['starter.services','auth.services', 'ngOp
        }
    };
   
-   $scope.submitRegisterMoreInfoMore = function(user) {
-       formData.RegsiterForm(userBasicInfo);  
-       userId = IDGenerator();       
+   $scope.submitRegisterMoreInfoMore = function(user) { 
+       userMoreInfo = user;
+       userId = IDGenerator();    
+       formData.RegsiterForm(userId, userBasicInfo, userMoreInfo, user);    
    };
    
    function IDGenerator() 
@@ -106,7 +108,7 @@ angular.module('starter.controllers', ['starter.services','auth.services', 'ngOp
       }
       
       function toggleLeftFunc(){
-          $ionicSideMenuDelegate.toggleLeft();
+        $ionicSideMenuDelegate.toggleLeft();
       }
   })
   
@@ -134,7 +136,7 @@ angular.module('starter.controllers', ['starter.services','auth.services', 'ngOp
 })
 
 /* ---- dashboard  -- */
-.controller('DashCtrl', function($scope, $stateParams, $ionicPopup, ngFB, $state, $ionicModal, $timeout, $state, $ionicSideMenuDelegate, formData, $ionicPopover) {
+.controller('DashCtrl', function($scope, $stateParams, $ionicPopup, ngFB, $state, $ionicModal, $timeout, $state, $ionicSideMenuDelegate, formData, $ionicPopover, Auth) {
   $scope.ContinueTxt = "Continue";
   console.log("loading...Dashboard")
   
