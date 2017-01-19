@@ -83,11 +83,11 @@ angular.module('starter', ['ionic', 'ionic.rating', 'starter.services', 'auth.se
     })
 
   .state('app.list-detail', {
-      url: '/list/:chatId',
+      url: '/ProfileDetail',
       views: {
         'menuContent': {
           templateUrl: 'templates/profile.html',
-          controller: 'ChatDetailCtrl'
+          controller: 'ProfileDetailCtrl'
         }
       }
   })

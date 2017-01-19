@@ -1,4 +1,5 @@
 var database = null;
+var _user = null;
 
 angular.module('starter.services', [])
 
@@ -18,14 +19,14 @@ angular.module('starter.services', [])
 
 .service('formData', function($state) {
  return {
-   RegsiterForm: function(userId, userBasicInfo, userMoreInfo, user) {
+   RegsiterForm: function(userBasicInfo, userMoreInfo, user, userId) {
      firebase.auth().createUserWithEmailAndPassword(userBasicInfo.email, userBasicInfo.password)
      .then(function(readCountTxn) {        
         $state.go('app.login');
-
+        
         // save user to the database
         database.ref('users/' + userId).set({
-          "email": userBasicInfo.email,
+          "email": userBasicInfo.email,          
           "name": userBasicInfo.name,
           "address": userBasicInfo.address,
           "mobileNum": userBasicInfo.telno,
@@ -81,7 +82,15 @@ angular.module('starter.services', [])
 
         console.log(error);
       });
-    }
+   },
+   
+   getUser:  function(userId) {
+     firebase.database().ref('/users/' + userId).once('value')
+        .then(function(snapshot) {
+          return snapshot.val();
+        }
+     );
+   }
  }
 })
 
@@ -119,43 +128,42 @@ angular.module('starter.services', [])
 
 angular.module('auth.services', [])
 .factory('Auth', function () {
-   var _user = null;
-   if (window.localStorage['session']) {
-      _user = JSON.parse(window.localStorage['session']);
-   }
+//   if (window.localStorage['session']) {
+//      _user = JSON.parse(window.localStorage['session']);
+//   }
 
    return {
-      setUser: function (email, userId) {
-        _user = { "user": { "email": email, "userId": userId } };
+      setUser: function (userId) {
+        _user = { "userId" : userId };
 
-        var userExists = false;
-        if (window.localStorage['session'] != undefined){
-          angular.forEach(JSON.parse(window.localStorage['session']), function(keyOuter, valueOuter) {
-            angular.forEach(keyOuter, function(keyInner, valueInner) {
-              if (keyInner === email) {
-                userExists = true;
-                // $scope.results.push({serial: key, owner: value[0].Owner});
-              }
-            });
-          });
-        }
-        else {
+//        var userExists = false;
+//        if (window.localStorage['session'] != undefined){
+//          angular.forEach(JSON.parse(window.localStorage['session']), function(keyOuter, valueOuter) {
+//            angular.forEach(keyOuter, function(keyInner, valueInner) {
+//              if (keyInner === email) {
+//                userExists = true;
+//                // $scope.results.push({serial: key, owner: value[0].Owner});
+//              }
+//            });
+//          });
+//        }
+//        else {
           window.localStorage['session'] = JSON.stringify(_user);
-        }
+//        }
 
-        if (!userExists && window.localStorage['session'] != undefined){
-          ///////// not working - not concatinating the user
-           window.localStorage['session'] = angular.extend(window.localStorage['session'], JSON.stringify(_user));
-        }
+//        if (!userExists && window.localStorage['session'] != undefined){
+//          ///////// not working - not concatinating the user
+//           window.localStorage['session'] = angular.extend(window.localStorage['session'], JSON.stringify(_user));
+//        }
       },
       isLoggedIn: function () {
-         return _user ? true : false;
+         return window.localStorage['session'] ? true : false;
       },
       getUser: function () {
-         return _user;
+         return JSON.parse(window.localStorage['session']);
       },
       logout: function () {
-         // window.localStorage.removeItem("session");
+         window.localStorage.removeItem("session");
          //window.localStorage.removeItem("list_dependents");
          _user = null;
       }

@@ -1,14 +1,14 @@
 var userBasicInfo = {};
-var userId = null;
 var userMoreInfo = null;
+var userId = null;
 
 angular.module('starter.controllers', ['starter.services','auth.services', 'ngOpenFB','ionic'])
 
 .controller("LoginCtrl", function($scope, $state, formData, $cordovaFile, Auth) {
-//   if (Auth.isLoggedIn())
-//   {
-//      $state.go('app.dash');     
-//   }
+   if (Auth.isLoggedIn())
+   {
+      $state.go('app.dash');     
+   }
    
    /////////////// Development 
    // $state.go('app.dash');
@@ -44,19 +44,26 @@ angular.module('starter.controllers', ['starter.services','auth.services', 'ngOp
        }
        else
        {
-          formData.LoginForm(user);             
-          Auth.setUser(user.email, userId);     
+          formData.LoginForm(user);  
+          userId = user.email.split("@");             
+          Auth.setUser(userId[0]);     
        }
    };
    
    $scope.submitRegisterBasicForm = function(user) {
        if (user.email == undefined || user.password == undefined )
        {
-          alert('Please enter email/password');
+          alert('Please enter email/password.');
        }
        else if (user.password != user.re_password)
        {
-          alert('Passwords do not match');
+          alert('Passwords do not match.');
+       }
+       else if (user.name == undefined || 
+                user.address == undefined || 
+                user.telno == undefined)
+       {
+          alert('Please fill out all the fields.');
        }
        else
        {
@@ -66,33 +73,44 @@ angular.module('starter.controllers', ['starter.services','auth.services', 'ngOp
    };
   
    $scope.submitRegisterMoreInfoMore = function(user) { 
-       userMoreInfo = user;
-       userId = IDGenerator();    
-       formData.RegsiterForm(userId, userBasicInfo, userMoreInfo, user);    
+       if (user.ownVehicle == undefined || 
+           user.vehicleType == undefined ||
+           user.driveNormally == undefined ||
+           user.alcoholic == undefined ||
+           user.occupation == undefined )
+       {
+          alert('Please fill out all the fields.');
+       }
+       else 
+       {
+          userMoreInfo = user;
+          userId = userBasicInfo.email.split("@");    
+          formData.RegsiterForm(userBasicInfo, userMoreInfo, user, userId[0]);
+       }    
    };
    
-   function IDGenerator() 
-   {	 
-		 this.length = 8;
-		 this.timestamp = +new Date;
-		 
-		 var _getRandomInt = function( min, max ) 
-     {
-			 return Math.floor( Math.random() * ( max - min + 1 ) ) + min;
-		 }
-		 
-		 var ts = this.timestamp.toString();
-		 var parts = ts.split( "" ).reverse();
-		 var id = "";
-		 
-		 for( var i = 0; i < this.length; ++i ) 
-     {
-			 var index = _getRandomInt( 0, parts.length - 1 );
-			 id += parts[index];	 
-		 }
-		 
-		 return id;		 
-	 }   
+//   function IDGenerator() 
+//   {	 
+//		 this.length = 8;
+//		 this.timestamp = +new Date;
+//		 
+//		 var _getRandomInt = function( min, max ) 
+//     {
+//			 return Math.floor( Math.random() * ( max - min + 1 ) ) + min;
+//		 }
+//		 
+//		 var ts = this.timestamp.toString();
+//		 var parts = ts.split( "" ).reverse();
+//		 var id = "";
+//		 
+//		 for( var i = 0; i < this.length; ++i ) 
+//     {
+//			 var index = _getRandomInt( 0, parts.length - 1 );
+//			 id += parts[index];	 
+//		 }
+//		 
+//		 return id;		 
+//	 }   
   })
   
   /* ---- menu controller -- */
@@ -133,6 +151,16 @@ angular.module('starter.controllers', ['starter.services','auth.services', 'ngOp
       console.log('tab > Settings');
        
     }
+})
+
+/* ---- Profile Details  -- */
+.controller('ProfileDetailCtrl', function($scope, $stateParams, Chats, Auth, formData) {
+  if (Auth.getUser() != undefined)
+  {
+    var currentUser = Auth.getUser().userId;  
+    $scope.profileDetail = formData.getUser(currentUser);  
+    var s = currentUser;
+  }
 })
 
 /* ---- dashboard  -- */
@@ -347,14 +375,6 @@ angular.module('starter.controllers', ['starter.services','auth.services', 'ngOp
 
 .controller('AboutusCtrl', function($scope) {
  
-})
-
-
-/* ------ */
-/* ---- List Details controller -- */
-
-.controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
-  $scope.chat = Chats.get(0);
 })
 
 /* ------ */
