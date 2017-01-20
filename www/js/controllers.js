@@ -1,4 +1,4 @@
-var userBasicInfo = {};
+var ratingDetailsuserBasicInfo = {};
 var userMoreInfo = null;
 var userId = null;
 
@@ -359,18 +359,35 @@ angular.module('starter.controllers', ['starter.services','auth.services', 'ngOp
   };
 })
 
-.controller('RatingCtrl', function($scope, $ionicPopup) {
+.controller('RatingCtrl', function($scope, $ionicPopup, formData) {
   // set the rate and max variables
   $scope.rating = {};
   $scope.rating.rate = 3;
   $scope.rating.max = 5;
 
+  $scope.isRated = false;
+
+  $scope.isRated = formData.getUser(userId).isRated;
+
+  $scope.submitRatingInfo = function(ratingInfo) { 
+    if (ratingInfo.ratingVal == undefined) {
+      alert('Please select your rating.');
+    }
+    else {
+      if (ratingInfo.comment == undefined){
+        ratingInfo.comment = "";
+      }
+      
+      formData.saveRating(ratingInfo, userId);
+    }
+  }
+
   $scope.AddRating = function() {
     $ionicPopup.alert({
         title: 'Done!',
         template: 'You Successfully Rated'
-      });
-    }
+    });
+  }
 })
 
 .controller('AboutusCtrl', function($scope) {

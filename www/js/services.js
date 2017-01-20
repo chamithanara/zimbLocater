@@ -34,7 +34,8 @@ angular.module('starter.services', [])
           "vehicleType": userMoreInfo.vehicleType,
           "driveNomally": userMoreInfo.driveNormally,
           "isAlcoholic": userMoreInfo.alcoholic,
-          "occupation": userMoreInfo.occupation
+          "occupation": userMoreInfo.occupation,
+          "isRated": false
         });
 
      }, function(error) {
@@ -90,7 +91,25 @@ angular.module('starter.services', [])
           return snapshot.val();
         }
      );
-   }
+   },
+
+   saveRating: function(ratingDetails, userId) {
+      // save rating to the database
+      database.ref('ratings/' + userId).set({
+        "rating": ratingDetails.ratingVal,          
+        "comment": ratingDetails.comment,
+      });
+
+      var userRef = database.ref.child("/users").child(userId);
+
+      userRef.once('value', function(snapshot) {
+        if (snapshot.val() === null) {
+            /* does not exist */
+        } else {
+            snapshot.ref().update({"isRated": true});
+        }
+      });
+   },
  }
 })
 
