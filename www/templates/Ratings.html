@@ -14,7 +14,7 @@
                 <img style="max-width: 100%; max-height: 100%" src="./img/mob-logo.png" />
               </div>
               
-              <form ng-if="!isRated" class="login-form" ng-submit="submitRatingInfo(ratingInfo)">
+              <form ng-show="!isRated" class="login-form" ng-submit="submitRatingInfo(ratingInfo)">
                 <div class="list" style="margin-top: 20px">
                   <label class="item item-input item-stacked-label" style="border: none">
                     <span class="input-label" style="font-size:20px">Please Select Your Rating*</span>
@@ -36,7 +36,68 @@
                 <button class="button button-block button-positive" style="margin-top:2%" ng-click="AddRating()"> Submit </button>
               </form>
 
-              <div ng-if="isRated" class="list" style="margin-top: 20px">
+              <div ng-show="isRated">
+                <div class="list" style="margin-top: 20px">
+                  <label class="item item-input item-stacked-label" style="border: none">
+                    <span class="input-label" style="font-size:20px;">Our Ratings</span>
+                    <div class="list">
+
+                      <a class="item item-icon-left" href="#">
+                        <i class="ion-android-star"></i>
+                          <i class="ion-android-star"></i>
+                            <i class="ion-android-star"></i>
+                              <i class="ion-android-star"></i>
+                                <i class="ion-android-star"></i>
+                                  
+                        Excellent
+                        <span class="badge positive">{{excellentCount}}%</span>
+                      </a>
+                    
+                      <a class="item item-icon-left item-icon-right" href="#">
+                        <i class="ion-android-star"></i>
+                          <i class="ion-android-star"></i>
+                            <i class="ion-android-star"></i>
+                              <i class="ion-android-star"></i>
+                        Good
+                        <span class="badge calm">{{goodCount}}%</span>
+                      </a>
+                    
+                      <a class="item item-icon-left" href="#">
+                        <i class="ion-android-star"></i>
+                          <i class="ion-android-star"></i>
+                            <i class="ion-android-star"></i>
+                        Neutral
+                        <span class="badge balanced">{{neutralCount}}%</span>
+                      </a>
+                    
+                      <a class="item item-icon-left" href="#">
+                        <i class="ion-android-star"></i>
+                          <i class="ion-android-star"></i>
+                        Need to Improve
+                        <span class="badge energized">{{ntImpovCount}}%</span>
+                      </a>
+                      
+                      <a class="item item-icon-left" href="#">
+                        <i class="ion-android-star"></i>
+                        Very bad
+                        <span class="badge assertive">{{badCount}}%</span>
+                      </a>
+                    
+                    </div>
+                  </label>
+                                    
+                  <label class="item item-input item-stacked-label" style="border: none">
+                    <span class="input-label" style="font-size:20px;">Comments</span>
+                    <div class="list">
+
+                      <a class="item item-icon-left" href="#" ng-repeat="(key, value) in ratings">
+                        {{key}}<br>
+                        <label style="font-size:15px;">{{value.comment}}</label>  
+                        <span class="badge positive">{{value.rating == 5 ? 'Excellent' : value.rating == 4 ? 'Good' : value.rating == 3 ? 'Neutral' : value.rating == 2 ? 'Need to Improve' : value.rating == 1 ? 'Very Bad' : ''}}</span>                 
+                      </a>
+                    </div>
+                  </label>
+                </div>
               </div>
 
             </section>

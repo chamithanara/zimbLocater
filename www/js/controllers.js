@@ -45,8 +45,9 @@ angular.module('starter.controllers', ['starter.services','auth.services', 'ngOp
        else
        {
           formData.LoginForm(user);  
-          userId = user.email.split("@");             
-          Auth.setUser(userId[0]);     
+          userId = user.email.split("@"); 
+          userId = userId[0];          
+          Auth.setUser(userId);     
        }
    };
    
@@ -87,30 +88,7 @@ angular.module('starter.controllers', ['starter.services','auth.services', 'ngOp
           userId = userBasicInfo.email.split("@");    
           formData.RegsiterForm(userBasicInfo, userMoreInfo, user, userId[0]);
        }    
-   };
-   
-//   function IDGenerator() 
-//   {	 
-//		 this.length = 8;
-//		 this.timestamp = +new Date;
-//		 
-//		 var _getRandomInt = function( min, max ) 
-//     {
-//			 return Math.floor( Math.random() * ( max - min + 1 ) ) + min;
-//		 }
-//		 
-//		 var ts = this.timestamp.toString();
-//		 var parts = ts.split( "" ).reverse();
-//		 var id = "";
-//		 
-//		 for( var i = 0; i < this.length; ++i ) 
-//     {
-//			 var index = _getRandomInt( 0, parts.length - 1 );
-//			 id += parts[index];	 
-//		 }
-//		 
-//		 return id;		 
-//	 }   
+   };  
   })
   
   /* ---- menu controller -- */
@@ -155,11 +133,14 @@ angular.module('starter.controllers', ['starter.services','auth.services', 'ngOp
 
 /* ---- Profile Details  -- */
 .controller('ProfileDetailCtrl', function($scope, $stateParams, Chats, Auth, formData) {
+ 
   if (Auth.getUser() != undefined)
   {
     var currentUser = Auth.getUser().userId;  
-    $scope.profileDetail = formData.getUser(currentUser);  
-    var s = currentUser;
+    formData.getUser(currentUser).then(function(snapshot) {
+        $scope.profileDetail = snapshot.val();
+      }
+    );  
   }
 })
 
@@ -206,19 +187,6 @@ angular.module('starter.controllers', ['starter.services','auth.services', 'ngOp
       latitude = pos.coords.latitude;
       longitude = pos.coords.longitude;
   });
-    
-//    google.maps.event.addListener(map, 'dragend', function(event) {
-//      document.getElementById("lat").value = event.latLng.lat();
-//      document.getElementById("long").value = event.latLng.lng();
-//    });
-    
-//  function toggleBounce() {
-//      if (myLocation.getAnimation() !== null) {
-//        myLocation.setAnimation(null);
-//      } else {
-//        myLocation.setAnimation(google.maps.Animation.BOUNCE);
-//      }
-//    }
     
   $scope.map = map;
 
@@ -359,18 +327,58 @@ angular.module('starter.controllers', ['starter.services','auth.services', 'ngOp
   };
 })
 
-.controller('RatingCtrl', function($scope, $ionicPopup, formData) {
+.controller('RatingCtrl', function($scope, $ionicPopup, formData, Auth) {
   // set the rate and max variables
   $scope.rating = {};
   $scope.rating.rate = 3;
   $scope.rating.max = 5;
+  var currentUser = Auth.getUser().userId;
 
-  $scope.isRated = false;
-
-  $scope.isRated = formData.getUser(userId).isRated;
+  formData.getUser(currentUser).then(function(snapshot) {
+        $scope.isRated = snapshot.val().isRated;
+        
+        formData.getRatings().then(function(result) {
+          var ratingData = result.val();
+          $scope.ratings = ratingData;
+          if ($scope.isRated){
+            
+            $scope.excellentCount = 0;
+            $scope.goodCount = 0;
+            $scope.neutralCount = 0;
+            $scope.ntImpovCount = 0;
+            $scope.badCount = 0;
+            
+            var iterator = 0;
+            angular.forEach(ratingData, function(value, key) {
+              if (value.rating == 5){
+                ++$scope.excellentCount;
+              }else if (value.rating == 4){
+                ++$scope.goodCount;                
+              }else if (value.rating == 3){
+                ++$scope.neutralCount;                
+              }else if (value.rating == 2){
+                ++$scope.ntImpovCount;                
+              }else if (value.rating == 1){
+                ++$scope.badCount;                
+              }
+              iterator = iterator + 1;
+            });
+            
+            $scope.excellentCount = $scope.excellentCount / iterator * 100;
+            $scope.goodCount = $scope.goodCount / iterator * 100;
+            $scope.neutralCount = $scope.neutralCount / iterator * 100;
+            $scope.ntImpovCount = $scope.ntImpovCount / iterator * 100;
+            $scope.badCount = $scope.badCount / iterator * 100;
+          }
+        });
+      }
+  );
 
   $scope.submitRatingInfo = function(ratingInfo) { 
-    if (ratingInfo.ratingVal == undefined) {
+    if (ratingInfo == undefined) {
+      alert('Please select your rating.');
+    }
+    else if (ratingInfo.ratingVal == undefined) {
       alert('Please select your rating.');
     }
     else {
@@ -378,15 +386,12 @@ angular.module('starter.controllers', ['starter.services','auth.services', 'ngOp
         ratingInfo.comment = "";
       }
       
-      formData.saveRating(ratingInfo, userId);
+      formData.saveRating(ratingInfo, currentUser);
+      $ionicPopup.alert({
+          title: 'Done!',
+          template: 'You Successfully Rated'
+      });
     }
-  }
-
-  $scope.AddRating = function() {
-    $ionicPopup.alert({
-        title: 'Done!',
-        template: 'You Successfully Rated'
-    });
   }
 })
 

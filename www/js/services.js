@@ -86,11 +86,7 @@ angular.module('starter.services', [])
    },
    
    getUser:  function(userId) {
-     firebase.database().ref('/users/' + userId).once('value')
-        .then(function(snapshot) {
-          return snapshot.val();
-        }
-     );
+     return firebase.database().ref('/users/' + userId).once('value');
    },
 
    saveRating: function(ratingDetails, userId) {
@@ -100,18 +96,15 @@ angular.module('starter.services', [])
         "comment": ratingDetails.comment,
       });
 
-      var userRef = database.ref.child("/users").child(userId);
+      var userRef = database.ref('/users/' + userId);
 
-      userRef.once('value', function(snapshot) {
-        if (snapshot.val() === null) {
-            /* does not exist */
-        } else {
-            snapshot.ref().update({"isRated": true});
-        }
-      });
+      database.ref().child('/users/' + userId).update({ isRated: true });
    },
- }
-})
+   
+   getRatings: function() {
+     return database.ref('/ratings/').once('value');
+   }
+}})
 
 .factory('Chats', function() {
   var users = [{
@@ -153,7 +146,7 @@ angular.module('auth.services', [])
 
    return {
       setUser: function (userId) {
-        _user = { "userId" : userId };
+        _user = { "userId" : userId.toLowerCase() };
 
 //        var userExists = false;
 //        if (window.localStorage['session'] != undefined){
