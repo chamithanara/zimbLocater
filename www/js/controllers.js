@@ -1,6 +1,7 @@
 var ratingDetailsuserBasicInfo = {};
 var userMoreInfo = null;
 var userId = null;
+var tagImages = ["police.png", "robbery.png", "crime.png", "accident.png", "pothole.png", "disaster.png", "school.png"];
 
 angular.module('starter.controllers', ['starter.services','auth.services', 'ngOpenFB','ionic'])
 
@@ -255,14 +256,15 @@ angular.module('starter.controllers', ['starter.services','auth.services', 'ngOp
                      ' <div>'+
                           '<section id="about-intro" class="clear">'+
                           '<h3 class="title" style="text-align:center;margin-top: 10px;color:white">Please Select Your Tag Type</h3>'+
-                  '<ion-radio ng-model="choice" style="margin-top: 15px;" ng-value="1">Police Check Point</ion-radio>'+
-                  '<ion-radio ng-model="choice" ng-value="2">Robbery Prone Area</ion-radio>'+
-                  '<ion-radio ng-model="choice" ng-value="3">Crime Scene</ion-radio>'+
-                  '<ion-radio ng-model="choice" ng-value="4">Accident</ion-radio>'+
-                  '<ion-radio ng-model="choice" ng-value="5">Big Pot Hole</ion-radio>'+
-                  '<ion-radio ng-model="choice" ng-value="6">Disaster (Flooding/Fire)</ion-radio>'+
-                  '<ion-radio ng-model="choice" ng-value="7">School Children</ion-radio>'+
-                  '<button class="button button-light button-android full" ng-click="AddTagToMap()" style="Width:100.05%">Confirm Tag</button>'+
+                  '<form class="login-form" ng-submit="AddTagToMap(choice)">'+           
+                  '<ion-radio ng-model="choice" style="margin-top: 15px;" ng-value="0">Police Check Point</ion-radio>'+
+                  '<ion-radio ng-model="choice" ng-value="1">Robbery Prone Area</ion-radio>'+
+                  '<ion-radio ng-model="choice" ng-value="2">Crime Scene</ion-radio>'+
+                  '<ion-radio ng-model="choice" ng-value="3">Accident</ion-radio>'+
+                  '<ion-radio ng-model="choice" ng-value="4">Big Pot Hole</ion-radio>'+
+                  '<ion-radio ng-model="choice" ng-value="5">Disaster (Flooding/Fire)</ion-radio>'+
+                  '<ion-radio ng-model="choice" ng-value="6">School Children</ion-radio>'+
+                  '<input type="submit" class="button button-light button-android full" style="Width: 100.07%;margin-left: -1px;" value="Confirm Tag"></form>'+
                   '</section></div></div>'+
                   '</ion-content>'+
                   '</ion-popover-view>';
@@ -273,33 +275,55 @@ angular.module('starter.controllers', ['starter.services','auth.services', 'ngOp
 
   $scope.openPopover = function($event) {
     $scope.popover.show($event);
-    $scope.choice = '1';
   };
-  $scope.closePopover = function() {
+  
+  $scope.closePopover = function(choice) {
     console.log(map.getCenter());
+    var selectedval = choice;
     
+    var image = {
+      url: '/img/' + tagImages[selectedval],
+      // This marker is 20 pixels wide by 32 pixels high.
+      size: new google.maps.Size(40, 40),
+      // The origin for this image is (0, 0).
+      origin: new google.maps.Point(0, 0),
+      // The anchor for this image is the base of the flagpole at (0, 32).
+      anchor: new google.maps.Point(20, 40)
+    };
+                      
     myLocation = new google.maps.Marker({
           position: new google.maps.LatLng(map.getCenter().lat(), map.getCenter().lng()),
           map: map,
           // draggable: true,
           animation: google.maps.Animation.DROP,
-          icon: {
-            path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
-            scale: 5
-          },
+          icon: image,
           title: "My Location"
       });
       
     $scope.popover.hide();
   };
   
-  $scope.AddTagToMap = function() {
-    $scope.closePopover();
-    
-    $ionicPopup.alert({
-      title: 'Done!',
-      template: 'Tag has been Added Successfully'
-    });
+  $scope.AddTagToMap = function(choice) {
+    if (choice != undefined){
+      var confirmPopup = $ionicPopup.confirm({
+        title: 'Confirm',
+        template: 'Do you want to add the selected tag?',
+        cancelText: 'No',
+        okText: 'Yes'
+      }).then(function(res) {
+          if (res) {
+              $scope.closePopover(choice);
+      
+              $ionicPopup.alert({
+                title: 'Done!',
+                template: 'Tag has been Added Successfully'
+              });
+          }
+      });
+    }
+    else {
+      alert("Please Select a Tag Type.");
+    }
   }
   
   //Cleanup the popover when we're done with it!
