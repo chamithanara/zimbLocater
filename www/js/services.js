@@ -105,11 +105,15 @@ angular.module('starter.services', [])
      return database.ref('/ratings/').once('value');
    },
    
-   addMarker: function(ratingDetails, userId) {
+   addMarker: function(latitude, longitude, tagType, userId, currentTime) {
+      var latLong = latitude.
       // save rating to the database
-      database.ref('markers/' + userId).set({
-        "rating": ratingDetails.ratingVal,          
-        "comment": ratingDetails.comment,
+      database.ref('markers/' + Math.random().toString(8)).set({
+        "latitude": latitude,          
+        "longitude": longitude,     
+        "tagType": tagType,     
+        "currentTime": currentTime,
+        "userId": userId
       });
       
    },

@@ -154,6 +154,8 @@ angular.module('starter.controllers', ['starter.services','auth.services', 'ngOp
   
   var latitude = null;
   var longitude = null;
+  var tagType = null;
+  var currentTime = null;
   
   var myLatlng = new google.maps.LatLng(37.3000, -120.4833);
 
@@ -300,7 +302,6 @@ angular.module('starter.controllers', ['starter.services','auth.services', 'ngOp
         title: "My Location"
     });
       
-    var tagType = null;
     if (selectedval == 0){
       tagType = "Police Check Point";
     }
@@ -318,12 +319,13 @@ angular.module('starter.controllers', ['starter.services','auth.services', 'ngOp
       tagType = "School Children";
     }
     
+    currentTime = new Date().toLocaleString();
     var contentString = '<div id="content">'+
             '<div id="siteNotice">'+
             '</div>'+
             '<h4 id="firstHeading" class="firstHeading">'+ tagType +'</h4>'+
-            '<p>Created: ' + new Date().toLocaleString() + '</p>'+
-            '</div>'+
+            '<p>Created Time : ' + currentTime + '</p> <br> '+
+            '<p>Created By : ' + userId + '</p> </div>'+
             '</div>';   
             
     var infowindow = new google.maps.InfoWindow({
@@ -342,7 +344,7 @@ angular.module('starter.controllers', ['starter.services','auth.services', 'ngOp
     if (choice != undefined){
       var confirmPopup = $ionicPopup.confirm({
         title: 'Confirm',
-        template: 'Do you want to add the selected tag?',
+        template: 'Do you want to add the selected marker here?',
         cancelText: 'No',
         okText: 'Yes'
       }).then(function(res) {
@@ -353,6 +355,8 @@ angular.module('starter.controllers', ['starter.services','auth.services', 'ngOp
                 title: 'Done!',
                 template: 'Tag has been Added Successfully'
               });
+
+              formData.addMarker(latitude, longitude, tagType, userId, currentTime);
           }
       });
     }
