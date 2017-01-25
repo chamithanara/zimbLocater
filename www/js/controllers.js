@@ -156,7 +156,7 @@ angular.module('starter.controllers', ['starter.services','auth.services', 'ngOp
   var longitude = null;
   var tagType = null;
   var currentTime = null;
-  
+  addAllMarkersToMap();
   var myLatlng = new google.maps.LatLng(37.3000, -120.4833);
 
   var mapOptions = {
@@ -192,22 +192,7 @@ angular.module('starter.controllers', ['starter.services','auth.services', 'ngOp
   });
     
   $scope.map = map;
-
-//  var infoWnd = new google.maps.InfoWindow({
-//    content :  map.getCenter().toUrlValue(),
-//    position : map.getCenter(),
-//    disableAutoPan: true
-//  });
-//  infoWnd.open(map);
-//
-//  //Retrive the center location
-//  google.maps.event.addListener(map, "center_changed", function() {
-//    infoWnd.setContent(map.getCenter().toUrlValue());
-//    infoWnd.setPosition(map.getCenter());
-//    infoWnd.open(map);
-//  });
-
-// Create the login modal that we will use later
+  
   $ionicModal.fromTemplateUrl('templates/menu.html', {
     scope: $scope
   }).then(function(modal) {
@@ -286,11 +271,11 @@ angular.module('starter.controllers', ['starter.services','auth.services', 'ngOp
     var image = {
       url: './img/' + tagImages[selectedval],
       // This marker is 20 pixels wide by 32 pixels high.
-      size: new google.maps.Size(40, 40),
+      size: new google.maps.Size(30, 30),
       // The origin for this image is (0, 0).
       origin: new google.maps.Point(0, 0),
       // The anchor for this image is the base of the flagpole at (0, 32).
-      anchor: new google.maps.Point(20, 40)
+      anchor: new google.maps.Point(15, 20)
     };
                       
     myLocation = new google.maps.Marker({
@@ -356,7 +341,7 @@ angular.module('starter.controllers', ['starter.services','auth.services', 'ngOp
                 template: 'Tag has been Added Successfully'
               });
 
-              formData.addMarker(latitude, longitude, tagType, userId, currentTime);
+              formData.addMarker(map.getCenter().lat(), map.getCenter().lng(), tagType, userId, currentTime);
           }
       });
     }
@@ -365,7 +350,7 @@ angular.module('starter.controllers', ['starter.services','auth.services', 'ngOp
     }
   }
 
-  $scope.addAllMarkersToMap = function() {
+  function addAllMarkersToMap() {
     formData.getAllMarkers().then(function(result) {
       var markers = result.val();
 
@@ -391,14 +376,14 @@ angular.module('starter.controllers', ['starter.services','auth.services', 'ngOp
         var image = {
           url: './img/' + tagImages[tagIndex],
           // This marker is 20 pixels wide by 32 pixels high.
-          size: new google.maps.Size(40, 40),
+          size: new google.maps.Size(30, 30),
           // The origin for this image is (0, 0).
           origin: new google.maps.Point(0, 0),
           // The anchor for this image is the base of the flagpole at (0, 32).
-          anchor: new google.maps.Point(20, 40)
+          anchor: new google.maps.Point(15, 30)
         };
                           
-        var MarkerLocation = new google.maps.Marker({
+        myLocation = new google.maps.Marker({
             position: new google.maps.LatLng(value.latitude, value.longitude),
             map: map,
             // draggable: true,
@@ -419,7 +404,7 @@ angular.module('starter.controllers', ['starter.services','auth.services', 'ngOp
           content: 'holding..'
         })
         
-        google.maps.event.addListener(MarkerLocation, 'click', function () {
+        google.maps.event.addListener(myLocation, 'click', function () {
           infowindow.setContent(contentString);
           infowindow.open(map, this);
         });
