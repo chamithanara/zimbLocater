@@ -364,6 +364,68 @@ angular.module('starter.controllers', ['starter.services','auth.services', 'ngOp
       alert("Please Select a Tag Type.");
     }
   }
+
+  $scope.addAllMarkersToMap = function() {
+    formData.getAllMarkers().then(function(result) {
+      var markers = result.val();
+
+      angular.forEach(markers, function(value, key) {
+        var tagIndex = 0;
+        if (value.tagType == "Police Check Point"){
+          tagIndex = 0;
+        }
+        else if (value.tagType == "Robbery Prone Area"){
+          tagIndex = 1;
+        }else if (value.tagType == "Crime Scene"){
+          tagIndex = 2;
+        }else if (value.tagType == "Accident"){
+          tagIndex = 3;
+        }else if (value.tagType == "Big Pot Hole"){
+          tagIndex = 4;
+        }else if (value.tagType == "Disaster"){
+          tagIndex = 5;
+        }else if (value.tagType == "School Children"){
+          tagIndex = 6;
+        }
+
+        var image = {
+          url: './img/' + tagImages[tagIndex],
+          // This marker is 20 pixels wide by 32 pixels high.
+          size: new google.maps.Size(40, 40),
+          // The origin for this image is (0, 0).
+          origin: new google.maps.Point(0, 0),
+          // The anchor for this image is the base of the flagpole at (0, 32).
+          anchor: new google.maps.Point(20, 40)
+        };
+                          
+        var MarkerLocation = new google.maps.Marker({
+            position: new google.maps.LatLng(value.latitude, value.longitude),
+            map: map,
+            // draggable: true,
+            animation: google.maps.Animation.DROP,
+            icon: image,
+            title: "My Location"
+        });
+                  
+        var contentString = '<div id="content">'+
+                '<div id="siteNotice">'+
+                '</div>'+
+                '<h4 id="firstHeading" class="firstHeading">'+ value.tagType +'</h4>'+
+                '<p>Created Time : ' + value.currentTime + '</p> <br> '+
+                '<p>Created By : ' + value.userId + '</p> </div>'+
+                '</div>';   
+                
+        var infowindow = new google.maps.InfoWindow({
+          content: 'holding..'
+        })
+        
+        google.maps.event.addListener(MarkerLocation, 'click', function () {
+          infowindow.setContent(contentString);
+          infowindow.open(map, this);
+        });
+      });
+    });
+  }
   
   //Cleanup the popover when we're done with it!
   $scope.$on('$destroy', function() {
