@@ -264,7 +264,7 @@ angular.module('starter.controllers', ['starter.services','auth.services', 'ngOp
                   '<ion-radio ng-model="choice" ng-value="4">Big Pot Hole</ion-radio>'+
                   '<ion-radio ng-model="choice" ng-value="5">Disaster (Flooding/Fire)</ion-radio>'+
                   '<ion-radio ng-model="choice" ng-value="6">School Children</ion-radio>'+
-                  '<input type="submit" class="button button-light button-android full" style="Width: 100.07%;margin-left: -1px;" value="Confirm Tag"></form>'+
+                  '<input type="submit" class="button button-light button-android full" style="Width: 100.08%;margin-left: -1px;" value="Confirm Tag"></form>'+
                   '</section></div></div>'+
                   '</ion-content>'+
                   '</ion-popover-view>';
@@ -282,7 +282,7 @@ angular.module('starter.controllers', ['starter.services','auth.services', 'ngOp
     var selectedval = choice;
     
     var image = {
-      url: '/img/' + tagImages[selectedval],
+      url: './img/' + tagImages[selectedval],
       // This marker is 20 pixels wide by 32 pixels high.
       size: new google.maps.Size(40, 40),
       // The origin for this image is (0, 0).
@@ -292,14 +292,49 @@ angular.module('starter.controllers', ['starter.services','auth.services', 'ngOp
     };
                       
     myLocation = new google.maps.Marker({
-          position: new google.maps.LatLng(map.getCenter().lat(), map.getCenter().lng()),
-          map: map,
-          // draggable: true,
-          animation: google.maps.Animation.DROP,
-          icon: image,
-          title: "My Location"
-      });
+        position: new google.maps.LatLng(map.getCenter().lat(), map.getCenter().lng()),
+        map: map,
+        // draggable: true,
+        animation: google.maps.Animation.DROP,
+        icon: image,
+        title: "My Location"
+    });
       
+    var tagType = null;
+    if (selectedval == 0){
+      tagType = "Police Check Point";
+    }
+    else if (selectedval == 1){
+      tagType = "Robbery Prone Area";
+    }else if (selectedval == 2){
+      tagType = "Crime Scene";
+    }else if (selectedval == 3){
+      tagType = "Accident";
+    }else if (selectedval == 4){
+      tagType = "Big Pot Hole";
+    }else if (selectedval == 5){
+      tagType = "Disaster";
+    }else if (selectedval == 6){
+      tagType = "School Children";
+    }
+    
+    var contentString = '<div id="content">'+
+            '<div id="siteNotice">'+
+            '</div>'+
+            '<h4 id="firstHeading" class="firstHeading">'+ tagType +'</h4>'+
+            '<p>Created: ' + new Date().toLocaleString() + '</p>'+
+            '</div>'+
+            '</div>';   
+            
+    var infowindow = new google.maps.InfoWindow({
+      content: 'holding..'
+    })
+    
+    google.maps.event.addListener(myLocation, 'click', function () {
+      infowindow.setContent(contentString);
+      infowindow.open(map, this);
+    });
+         
     $scope.popover.hide();
   };
   

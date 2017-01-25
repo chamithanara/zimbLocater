@@ -103,7 +103,16 @@ angular.module('starter.services', [])
    
    getRatings: function() {
      return database.ref('/ratings/').once('value');
-   }
+   },
+   
+   addMarker: function(ratingDetails, userId) {
+      // save rating to the database
+      database.ref('markers/' + userId).set({
+        "rating": ratingDetails.ratingVal,          
+        "comment": ratingDetails.comment,
+      });
+      
+   },
 }})
 
 .factory('Chats', function() {
