@@ -146,7 +146,7 @@ angular.module('starter.controllers', ['starter.services','auth.services', 'ngOp
 })
 
 /* ---- dashboard  -- */
-.controller('DashCtrl', function($scope, $stateParams, $ionicPopup, ngFB, $state, $ionicModal, $timeout, $state, $ionicSideMenuDelegate, formData, $ionicPopover, Auth) {
+.controller('DashCtrl', function($scope, $cordovaLocalNotification, $ionicPlatform, $stateParams, $ionicPopup, ngFB, $state, $ionicModal, $timeout, $state, $ionicSideMenuDelegate, formData, $ionicPopover, Auth) {
   $scope.ContinueTxt = "Continue";
   console.log("loading...Dashboard")
   
@@ -424,7 +424,29 @@ angular.module('starter.controllers', ['starter.services','auth.services', 'ngOp
   $scope.$on('popover.removed', function() {
     // Execute action
   });
-    
+
+  // var p1 = new google.maps.LatLng(45.463688, 9.18814);
+  // var p2 = new google.maps.LatLng(46.0438317, 9.75936230000002);
+
+  // alert(calcDistance(p1, p2));
+
+  //calculates distance between two points in km's
+  function calcDistance(p1, p2) {
+    return (google.maps.geometry.spherical.computeDistanceBetween(p1, p2) / 1000).toFixed(2);
+  }
+  
+  $ionicPlatform.ready(function () {
+    $cordovaLocalNotification.schedule({
+        id: 1,
+        title: 'Warning',
+        text: 'Youre so sexy!',
+        data: {
+          customProperty: 'custom value'
+        }
+      }).then(function (result) {
+        console.log('Notification 1 triggered');
+      });
+  });
 })
 
 /* ---- List  -- */
