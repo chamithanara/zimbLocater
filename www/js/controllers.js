@@ -434,15 +434,12 @@ angular.module('starter.controllers', ['starter.services','auth.services', 'ngOp
   function calcDistance(p1, p2) {
     return (google.maps.geometry.spherical.computeDistanceBetween(p1, p2) / 1000).toFixed(2);
   }
-  
+
   $ionicPlatform.ready(function () {
     $cordovaLocalNotification.schedule({
         id: 1,
         title: 'Warning',
-        text: 'Youre so sexy!',
-        data: {
-          customProperty: 'custom value'
-        }
+        text: 'Notification!',
       }).then(function (result) {
         console.log('Notification 1 triggered');
       });
